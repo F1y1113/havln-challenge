@@ -121,6 +121,35 @@
         </div>
         <p>Use the official episode manifests for identifiers. Data preparation and simulator details are in the <a href="https://github.com/F1y1113/havln-challenge/blob/main/README.md">participant README</a>.</p>
         <img class="wide-media" loading="lazy" src="assets/media/simulator.webp" alt="HAPS2.0 simulator pipeline from human activity annotation to real-time dynamic rendering.">
+        <h3 class="title is-4 dataset-examples-title">🎬 Dataset Examples</h3>
+        <p>These released HA-VLN 2.0 clips show people moving and interacting in indoor scenes; they illustrate the human-aware setting, not a participant agent's performance.</p>
+        <div class="dataset-feature">
+          <h4 class="title is-5">Multiple people in one scene</h4>
+          <video autoplay loop muted playsinline controls preload="metadata" aria-label="HA-VLN 2.0 scene with multiple gray-model people moving indoors">
+            <source src="assets/media/scene-diversity.mp4" type="video/mp4">
+            Your browser does not support MP4 video.
+          </video>
+          <p>Several people share the same indoor scene, making the changing human context visible.</p>
+        </div>
+        <div class="columns is-variable is-5 dataset-example-columns">
+          <div class="column is-half dataset-example">
+            <h4 class="title is-5">Phone pacing</h4>
+            <video autoplay loop muted playsinline controls preload="metadata" aria-label="HA-VLN 2.0 gray-model person walking while using a phone">
+              <source src="assets/media/demo-3.mp4" type="video/mp4">
+              Your browser does not support MP4 video.
+            </video>
+            <p>A person walks while using a phone, creating a moving social cue.</p>
+          </div>
+          <div class="column is-half dataset-example">
+            <h4 class="title is-5">Running and stopping</h4>
+            <video autoplay loop muted playsinline controls preload="metadata" aria-label="HA-VLN 2.0 gray-model person running and stopping">
+              <source src="assets/media/demo-4.mp4" type="video/mp4">
+              Your browser does not support MP4 video.
+            </video>
+            <p>Faster motion and a sudden stop change the space available for navigation.</p>
+          </div>
+        </div>
+        <p class="media-credit">Released HA-VLN 2.0 media: the scene clip is from the <a href="https://github.com/UWMILab/HA-VLN-webpage">project page</a>; the activity clips are from the <a href="https://github.com/UWMILab/HA-VLN/tree/main/demo/vids">code repository</a>, whose <a href="assets/media/HA-VLN-MIT-LICENSE.txt">MIT notice</a> is retained. Explore more scenes and activities on the <a href="https://uwmilab.github.io/HA-VLN-webpage/#demos">HA-VLN 2.0 demo page</a>.</p>
     </section>
     <hr>
 

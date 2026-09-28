@@ -33,6 +33,11 @@ main .content > section > h2 { margin-top: 2.5rem; }
 .score-panel { text-align: center; }
 .score-box { display: inline-block; max-width: 820px; margin: 1.5rem auto; padding: 20px 30px; border-radius: 12px; background: #f5f5f5; text-align: center; }
 .score-box p { margin-bottom: .35rem; }
+.dataset-examples-title { margin-top: 2rem; }
+.dataset-feature { max-width: 760px; margin: 1.5rem auto; }
+.dataset-feature video, .dataset-example video { display: block; width: 100%; height: auto; border-radius: 8px; background: #111; }
+.dataset-feature p, .dataset-example p { margin-top: .75rem; }
+.dataset-example-columns { margin-top: 1rem; }
 .demo-example video { display: block; width: 100%; height: auto; border-radius: 8px; background: #111; }
 .demo-example p { margin-top: 1rem; }
 .media-credit { font-size: .9rem; }
