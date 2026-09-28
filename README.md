@@ -85,25 +85,19 @@ The challenge uses released HA-VLN 2.0 resources: HA-R2R navigation episodes
 and instructions, HAPS2.0 human assets, multi-human annotations, and licensed
 Matterport3D scenes. Challenge datasets are external to the Docker image.
 
-| HA-R2R split | Instructions |
-|:--|--:|
-| Train | 10,819 |
-| Validation Seen (`val_seen`) | 778 |
-| Validation Unseen (`val_unseen`) | 1,839 |
-| Test | 3,408 |
-| Total | 16,844 |
+| HA-R2R split | Instructions | Distinct trajectories | Human-influenced episodes ($\beta L$) |
+|:--|--:|--:|--:|
+| Train | 10,819 | 3,603 | — |
+| Validation Seen (`val_seen`) | 778 | 259 | 682 |
+| Validation Unseen (`val_unseen`) | 1,839 | 613 | 1,593 |
+| Test | 3,408 | — | — |
+| **Total** | **16,844** | — | — |
 
-Across the released train, `val_seen`, and `val_unseen` splits, the distinct
-`trajectory_id` counts are 3,603, 259, and 613, respectively. The released
-human-influenced validation counts ($\beta L$) are 682 for `val_seen` and
-1,593 for `val_unseen`. Each episode requires its own action sequence.
-
-Phase 1 requires one action sequence for each of the 778 `val_seen` and 1,839
-`val_unseen` episodes. The complete HA-R2R benchmark spans 90 scenes. Its
-HAPS 2.0 assets comprise 910 human models and 486 motion sequences of 120
-frames each. The published test split size does not expose its scoring data:
-Phase 2 participant inputs will be supplied separately, while the reference
-trajectories and collision annotations used for scoring remain withheld.
+The complete HA-R2R benchmark spans 90 scenes, and HAPS 2.0 provides 910
+human models and 486 motion sequences (120 frames each). Phase 1 requires one
+action sequence for each of the 778 `val_seen` and 1,839 `val_unseen` episodes.
+Phase 2 provides test inputs for final evaluation, while reference trajectories
+and collision annotations remain withheld.
 
 ```text
 /data/havln2/
@@ -299,19 +293,11 @@ scores.
 
 ## 🧠 Baseline Model
 
-CMA is the released VLN-CE cross-modal attention reference adapted by HA-VLN
-2.0. The paper proposes two human-aware baseline agents, HA-VLN-CMA and
-HA-VLN-VL. CMA is the executable challenge reference, not a required
-architecture. The paper also evaluates external comparison methods.
-
-| Model | Role | Main approach |
-|:--|:--|:--|
-| HA-VLN-CMA | Challenge reference | Cross-modal attention over instruction and observations. |
-| HA-VLN-VL | Paper-proposed baseline | Vision-language navigation adapted to human-aware scenes. |
-| BEVBert | External comparison | Bird's-eye-view language-conditioned navigation. |
-| ETPNav | External comparison | Topological navigation with exploration and planning. |
-| NaVid | External zero-shot comparison | Vision-language navigation with a multimodal model. |
-| NaVILA | External zero-shot comparison | Vision-language-action navigation with a multimodal model. |
+We provide **HA-VLN-CMA**, the released VLN-CE cross-modal attention agent
+adapted by HA-VLN 2.0, as the executable reference baseline for this challenge
+(alongside HA-VLN-VL and external methods such as BEVBert, ETPNav, NaVid, and
+NaVILA evaluated in the paper). Participants are free to use any model or
+planning approach that outputs valid action sequences.
 
 Organizer re-evaluation of the public CMA validation checkpoint produced:
 
@@ -454,8 +440,7 @@ the challenge Docker image, mount it at `/data/havln2` inside the container.
 
 For technical support, use [GitHub Issues](https://github.com/F1y1113/havln-challenge/issues).
 For event and registration questions, email
-[roboworld2026@outlook.com](mailto:roboworld2026@outlook.com). The consolidated
-challenge dataset distribution will be linked when available.
+[roboworld2026@outlook.com](mailto:roboworld2026@outlook.com).
 
 | Resource | Link |
 |:--|:--|

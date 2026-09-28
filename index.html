@@ -43,7 +43,7 @@
     <hr>
     <section id="overview">
         <h2 class="title is-3">🌍 Challenge Overview</h2>
-        <p>HA-VLN asks an embodied agent to follow natural-language route instructions through indoor and outdoor spaces populated by dynamic people. Success requires both navigation progress and socially safe behavior. Official evaluation replays action sequences in the released HA-VLN 2.0 Habitat 0.1.7 runtime.</p>
+        <p>HA-VLN asks an embodied agent to follow natural-language route instructions through photorealistic 3D environments populated by dynamic people. Success requires both navigation progress and socially safe behavior. Official evaluation replays action sequences in the released HA-VLN 2.0 Habitat 0.1.7 runtime.</p>
     </section>
 
     <section id="task">
@@ -55,7 +55,7 @@
               <tr><td><b>Input</b></td><td>Episode ID, initial position and yaw, navigation instruction, and released human-aware episode inputs.</td></tr>
               <tr><td><b>Output</b></td><td>One ordered action sequence for each official episode ID.</td></tr>
               <tr><td><b>Action Space</b></td><td>STOP, MOVE_FORWARD, TURN_LEFT, TURN_RIGHT, LOOK_UP, and LOOK_DOWN.</td></tr>
-              <tr><td><b>Setting</b></td><td>Human-populated indoor and outdoor areas; action sequences are replayed in the released HA-VLN 2.0 Habitat 0.1.7 runtime.</td></tr>
+              <tr><td><b>Setting</b></td><td>Continuous human-populated 3D environments; action sequences are replayed in the released HA-VLN 2.0 Habitat 0.1.7 runtime.</td></tr>
             </tbody>
           </table>
         </div>
@@ -122,10 +122,10 @@
             </tbody>
           </table>
         </div>
-        <p>HAPS 2.0 provides 910 human models and 486 motion sequences of 120 frames each. Phase 1 submissions must cover all 778 <code>val_seen</code> and 1,839 <code>val_unseen</code> episodes. The published test count does not expose Phase 2 scoring references: participant inputs will be supplied separately, while reference trajectories and collision annotations remain withheld. Use the official episode manifests for identifiers; data preparation and simulator details are in the <a href="https://github.com/F1y1113/havln-challenge/blob/main/README.md">participant README</a>.</p>
+        <p>HAPS 2.0 provides 910 human models and 486 motion sequences of 120 frames each. Phase 1 submissions must cover all 778 <code>val_seen</code> and 1,839 <code>val_unseen</code> episodes; Phase 2 provides test inputs for final evaluation while reference trajectories and collision annotations remain withheld. Use the official episode manifests for identifiers; data preparation and simulator details are in the <a href="https://github.com/F1y1113/havln-challenge/blob/main/README.md">participant README</a>.</p>
         <img class="wide-media" loading="lazy" src="assets/media/simulator.webp" alt="HAPS2.0 simulator pipeline from human activity annotation to real-time dynamic rendering.">
         <h3 class="title is-4 dataset-examples-title">🎬 Dataset Examples</h3>
-        <p>These released HA-VLN 2.0 clips show people moving and interacting in photorealistic scenes; they illustrate the human-aware setting, not a participant agent's performance.</p>
+        <p>These released HA-VLN 2.0 clips illustrate dynamic human activities and multi-human interactions in photorealistic scenes.</p>
         <div class="dataset-feature">
           <h4 class="title is-5">Multiple people in one scene</h4>
           <video autoplay loop muted playsinline controls preload="metadata" aria-label="HA-VLN 2.0 scene with multiple gray-model people moving indoors">
@@ -152,7 +152,7 @@
             <p>Faster motion and a sudden stop change the space available for navigation.</p>
           </div>
         </div>
-        <p class="media-credit">Released HA-VLN 2.0 media: the scene clip is from the <a href="https://github.com/UWMILab/HA-VLN-webpage">project page</a>; the activity clips are from the <a href="https://github.com/UWMILab/HA-VLN/tree/main/demo/vids">code repository</a>, whose <a href="assets/media/HA-VLN-MIT-LICENSE.txt">MIT notice</a> is retained. Explore more scenes and activities on the <a href="https://uwmilab.github.io/HA-VLN-webpage/#demos">HA-VLN 2.0 demo page</a>.</p>
+        <p class="media-credit">Released HA-VLN 2.0 media from the <a href="https://uwmilab.github.io/HA-VLN-webpage/">project page</a> and <a href="https://github.com/UWMILab/HA-VLN/tree/main/demo/vids">code repository</a>. Explore more scenes and activities on the <a href="https://uwmilab.github.io/HA-VLN-webpage/#demos">HA-VLN 2.0 demo page</a>.</p>
     </section>
     <hr>
 
@@ -177,7 +177,7 @@
             <p><b>Navigation Instruction:</b> Exit the room and make a left turn. Proceed down the hallway <b>where an individual is ironing clothes, carefully smoothing out wrinkles on garments</b>. Continue walking and make another left turn. Enter the next room, which is a bedroom. Inside, <b>someone is comfortably seated in bed, engrossed in reading a book</b>. Move past the bed, ensuring not to disturb the reader. Turn left again to enter the bathroom. Once inside, position yourself near the sink and wait there, observing the surroundings without interfering with any activities.</p>
           </div>
         </div>
-        <p class="media-credit">Videos and instructions: <a href="https://github.com/UWMILab/HA-VLN/tree/main/demo">HA-VLN 2.0 authors</a>; video copies retain the <a href="assets/media/HA-VLN-MIT-LICENSE.txt">upstream MIT license</a>.</p>
+        <p class="media-credit">Videos and instructions from the <a href="https://github.com/UWMILab/HA-VLN/tree/main/demo">HA-VLN 2.0 repository</a>.</p>
     </section>
     <hr>
 
