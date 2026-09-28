@@ -7,7 +7,7 @@
 *Built on [HA-VLN 2.0](https://uwmilab.github.io/HA-VLN-webpage/) and co-organized with the [RoboPAD Workshop at NeurIPS 2026](https://robotpad2026.github.io/)*
 
 [![RoboWorld](https://img.shields.io/badge/RoboWorld-2026-blue)](https://roboworld2026.github.io/)
-[![Track 2](https://img.shields.io/badge/Track_2-HA--VLN-green)](https://jostarxiong.github.io/roboworld2026-track2/)
+[![Track 2](https://img.shields.io/badge/Track_2-HA--VLN-green)](https://f1y1113.github.io/havln-challenge/)
 [![CodaBench](https://img.shields.io/badge/CodaBench-Submit-purple)](https://www.codabench.org/competitions/18135/)
 [![RoboPAD](https://img.shields.io/badge/Jointly_with-RoboPAD_2026-red)](https://robotpad2026.github.io/)
 [![Paper](https://img.shields.io/badge/arXiv-2503.14229-b31b1b)](https://arxiv.org/abs/2503.14229)
@@ -304,8 +304,6 @@ methods; CMA is the executable challenge reference, not a required architecture.
 | BEVBert | Paper comparison | Bird's-eye-view language-conditioned navigation. |
 | ETPNav | Paper comparison | Topological navigation with exploration and planning. |
 
-![HA-VLN 2.0 paper network structures for HA-VLN-VL and HA-VLN-CMA](assets/media/model-architectures.webp)
-
 Organizer re-evaluation of the public CMA validation checkpoint produced:
 
 | Split | SR ↑ | NE ↓ | CR ↓ | TCR ↓ | Score ↑ |
@@ -445,7 +443,7 @@ the challenge Docker image, mount it at `/data/havln2` inside the container.
 
 ## 🔗 Contact and Resources
 
-For technical support, use [GitHub Issues](https://github.com/JostarXiong/roboworld2026-track2/issues).
+For technical support, use [GitHub Issues](https://github.com/F1y1113/havln-challenge/issues).
 For event and registration questions, email
 [roboworld2026@outlook.com](mailto:roboworld2026@outlook.com). The consolidated
 challenge dataset distribution will be linked when available.
@@ -454,7 +452,8 @@ challenge dataset distribution will be linked when available.
 |:--|:--|
 | RoboWorld 2026 | [Challenge website](https://roboworld2026.github.io/) |
 | Starting kits, submissions, and leaderboard | [CodaBench](https://www.codabench.org/competitions/18135/) |
-| Track website | [HA-VLN Challenge](https://jostarxiong.github.io/roboworld2026-track2/) |
+| Track website | [HA-VLN Challenge](https://f1y1113.github.io/havln-challenge/) |
+| Challenge repository and participant toolkit | [GitHub](https://github.com/F1y1113/havln-challenge) |
 | Associated workshop | [RoboPAD 2026](https://robotpad2026.github.io/) |
 | HA-VLN 2.0 | [Project page](https://uwmilab.github.io/HA-VLN-webpage/) |
 | HA-VLN 2.0 code and CMA | [Official repository](https://github.com/UWMILab/HA-VLN) |
@@ -487,7 +486,7 @@ If you use HA-VLN 2.0 or this challenge toolkit, cite the benchmark paper:
   title={Track 2 | HA-VLN: Human-Aware Vision-and-Language Navigation},
   author={RoboWorld Challenge 2026 Organizers},
   year={2026},
-  howpublished={https://jostarxiong.github.io/roboworld2026-track2/}
+  howpublished={https://f1y1113.github.io/havln-challenge/}
 }
 ```
 
