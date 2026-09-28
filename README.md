@@ -7,7 +7,7 @@
 *Built on [HA-VLN 2.0](https://uwmilab.github.io/HA-VLN-webpage/) and co-organized with the [RoboPAD Workshop at NeurIPS 2026](https://robotpad2026.github.io/)*
 
 [![RoboWorld](https://img.shields.io/badge/RoboWorld-2026-blue)](https://roboworld2026.github.io/)
-[![Track 2](https://img.shields.io/badge/Track_2-HA--VLN-green)](https://jostarxiong.github.io/roboworld2026-track2/)
+[![Track 2](https://img.shields.io/badge/Track_2-HA--VLN-green)](https://f1y1113.github.io/havln-challenge/)
 [![CodaBench](https://img.shields.io/badge/CodaBench-Submit-purple)](https://www.codabench.org/competitions/18135/)
 [![RoboPAD](https://img.shields.io/badge/Jointly_with-RoboPAD_2026-red)](https://robotpad2026.github.io/)
 [![Paper](https://img.shields.io/badge/arXiv-2503.14229-b31b1b)](https://arxiv.org/abs/2503.14229)
@@ -20,10 +20,11 @@
 
 ## 🌍 Challenge Overview
 
-HA-VLN evaluates instruction-following agents in continuous indoor environments
-populated by dynamic people. An agent must ground a natural-language route,
-reach its goal, and avoid human collisions. Official scoring replays submitted
-actions in the released HA-VLN 2.0 Habitat 0.1.7 runtime.
+HA-VLN evaluates instruction-following agents in continuous environments with
+indoor and outdoor areas populated by dynamic people. An agent must ground a
+natural-language route, reach its goal, and avoid human collisions. Official
+scoring replays submitted actions in the released HA-VLN 2.0 Habitat 0.1.7
+runtime.
 
 ### 🎯 Task Definition
 
@@ -84,20 +85,19 @@ The challenge uses released HA-VLN 2.0 resources: HA-R2R navigation episodes
 and instructions, HAPS2.0 human assets, multi-human annotations, and licensed
 Matterport3D scenes. Challenge datasets are external to the Docker image.
 
-| HA-R2R split | Distinct trajectories | Episodes / instructions | Human-influenced episodes ($\beta L$) |
+| HA-R2R split | Instructions | Distinct trajectories | Human-influenced episodes ($\beta L$) |
 |:--|--:|--:|--:|
-| Train | 3,603 | 10,819 | — |
-| `val_seen` | 259 | 778 | 682 |
-| `val_unseen` | 613 | 1,839 | 1,593 |
+| Train | 10,819 | 3,603 | — |
+| Validation Seen (`val_seen`) | 778 | 259 | 682 |
+| Validation Unseen (`val_unseen`) | 1,839 | 613 | 1,593 |
+| Test | 3,408 | — | — |
+| **Total** | **16,844** | — | — |
 
-Distinct trajectories are counted by `trajectory_id` within each released
-split; each episode requires its own action sequence.
-
-Phase 1 requires one action sequence for each of the 778 `val_seen` and 1,839
-`val_unseen` episodes. The complete HA-R2R benchmark contains 16,844
-instructions across 90 scenes. Its HAPS2.0 assets comprise 910 placed human
-models drawn from 486 motion sequences of 120 frames each. Final-phase episode
-identities and submission coverage will be supplied with that phase's bundle.
+The complete HA-R2R benchmark spans 90 scenes, and HAPS 2.0 provides 910
+human models and 486 motion sequences (120 frames each). Phase 1 requires one
+action sequence for each of the 778 `val_seen` and 1,839 `val_unseen` episodes.
+Phase 2 provides test inputs for final evaluation, while reference trajectories
+and collision annotations remain withheld.
 
 ```text
 /data/havln2/
@@ -293,18 +293,11 @@ scores.
 
 ## 🧠 Baseline Model
 
-CMA is the released VLN-CE cross-modal attention reference adapted by HA-VLN
-2.0. The paper also evaluates HA-VLN-VL, BEVBert and ETPNav as comparison
-methods; CMA is the executable challenge reference, not a required architecture.
-
-| Model | Role | Main approach |
-|:--|:--|:--|
-| HA-VLN-CMA | Challenge reference | Cross-modal attention over instruction and observations. |
-| HA-VLN-VL | Paper comparison | Vision-language navigation baseline adapted to human-aware scenes. |
-| BEVBert | Paper comparison | Bird's-eye-view language-conditioned navigation. |
-| ETPNav | Paper comparison | Topological navigation with exploration and planning. |
-
-![HA-VLN 2.0 paper network structures for HA-VLN-VL and HA-VLN-CMA](assets/media/model-architectures.webp)
+We provide **HA-VLN-CMA**, the released VLN-CE cross-modal attention agent
+adapted by HA-VLN 2.0, as the executable reference baseline for this challenge
+(alongside HA-VLN-VL and external methods such as BEVBert, ETPNav, NaVid, and
+NaVILA evaluated in the paper). Participants are free to use any model or
+planning approach that outputs valid action sequences.
 
 Organizer re-evaluation of the public CMA validation checkpoint produced:
 
@@ -321,10 +314,10 @@ checkpoint, runtime, or evaluation details.
 
 | Metric | Direction | Meaning |
 |:--|:--|:--|
-| SR | Higher | Collision-free success rate over all episodes. |
-| NE | Lower | Mean final navigation error in metres. |
-| CR | Lower | Collision-episode rate over released human-influenced episodes. |
-| TCR | Lower | Mean adjusted human-collision count over all episodes. |
+| SR (Success Rate) | Higher | Collision-free success rate over all episodes. |
+| NE (Navigation Error) | Lower | Mean final navigation error in metres. |
+| CR (Collision Rate) | Lower | Collision-episode rate over released human-influenced episodes. |
+| TCR (Total Collision Rate) | Lower | Mean adjusted human-collision count over all episodes. |
 
 Let $L$ be the number of episodes, $s_i$ the navigation-success indicator,
 $d_i$ the final goal distance, and $e_i$ the adjusted human-collision count.
@@ -445,16 +438,16 @@ the challenge Docker image, mount it at `/data/havln2` inside the container.
 
 ## 🔗 Contact and Resources
 
-For technical support, use [GitHub Issues](https://github.com/JostarXiong/roboworld2026-track2/issues).
+For technical support, use [GitHub Issues](https://github.com/F1y1113/havln-challenge/issues).
 For event and registration questions, email
-[roboworld2026@outlook.com](mailto:roboworld2026@outlook.com). The consolidated
-challenge dataset distribution will be linked when available.
+[roboworld2026@outlook.com](mailto:roboworld2026@outlook.com).
 
 | Resource | Link |
 |:--|:--|
 | RoboWorld 2026 | [Challenge website](https://roboworld2026.github.io/) |
 | Starting kits, submissions, and leaderboard | [CodaBench](https://www.codabench.org/competitions/18135/) |
-| Track website | [HA-VLN Challenge](https://jostarxiong.github.io/roboworld2026-track2/) |
+| Track website | [HA-VLN Challenge](https://f1y1113.github.io/havln-challenge/) |
+| Challenge repository and participant toolkit | [GitHub](https://github.com/F1y1113/havln-challenge) |
 | Associated workshop | [RoboPAD 2026](https://robotpad2026.github.io/) |
 | HA-VLN 2.0 | [Project page](https://uwmilab.github.io/HA-VLN-webpage/) |
 | HA-VLN 2.0 code and CMA | [Official repository](https://github.com/UWMILab/HA-VLN) |
@@ -473,10 +466,10 @@ governed by the Terms displayed on the official CodaBench competition.
 If you use HA-VLN 2.0 or this challenge toolkit, cite the benchmark paper:
 
 ```bibtex
-@misc{dong2025havln20openbenchmark,
+@misc{dong2026havln20openbenchmark,
   title={HA-VLN 2.0: An Open Benchmark and Leaderboard for Human-Aware Navigation in Discrete and Continuous Environments with Dynamic Multi-Human Interactions},
-  author={Yifei Dong and Fengyi Wu and Qi He and Zhi-Qi Cheng and Heng Li and Minghan Li and Zebang Cheng and Yuxuan Zhou and Jingdong Sun and Qi Dai and Alexander G. Hauptmann},
-  year={2025},
+  author={Yifei Dong and Fengyi Wu and Qi He and Lingdong Kong and Heng Li and Minghan Li and Zebang Cheng and Yuxuan Zhou and Jingdong Sun and Qi Dai and Alexander G Hauptmann and Zhi-Qi Cheng},
+  year={2026},
   eprint={2503.14229},
   archivePrefix={arXiv},
   primaryClass={cs.AI},
@@ -487,7 +480,7 @@ If you use HA-VLN 2.0 or this challenge toolkit, cite the benchmark paper:
   title={Track 2 | HA-VLN: Human-Aware Vision-and-Language Navigation},
   author={RoboWorld Challenge 2026 Organizers},
   year={2026},
-  howpublished={https://jostarxiong.github.io/roboworld2026-track2/}
+  howpublished={https://f1y1113.github.io/havln-challenge/}
 }
 ```
 

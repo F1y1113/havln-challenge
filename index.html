@@ -14,31 +14,37 @@
   <script defer src="track_assets/js/fontawesome.all.min.js"></script>
 </head>
 <body>
-  <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
+  <a id="backToTopBtn" class="back-to-top" href="#top" aria-label="Back to top">↑</a>
 
   <header id="top" class="hero">
     <div class="hero-body">
-      <div class="container narrow has-text-centered">
+      <div class="container is-max-desktop has-text-centered">
+        <div class="columns is-centered"><div class="column is-full-width left">
         <h1 class="title is-1 publication-title"><i class="fas fa fa-globe fa-2x" style="color: #76b900;"></i><br>The <span class="robo">Robo</span><span class="world">World</span> Challenge 2026</h1>
         <h2 class="title is-2 publication-title">Track 2: HA-VLN</h2>
         <h3 class="title is-4 publication-title hero-subtitle">Human-Aware Vision-and-Language Navigation</h3>
         <p>Built on HA-VLN 2.0 · Jointly held with the <a href="https://robotpad2026.github.io/">RoboPAD Workshop at NeurIPS 2026</a></p>
         <p class="hero-submit"><a class="button is-medium primary" href="https://www.codabench.org/competitions/18135/">🚀 Submit on CodaBench</a></p>
+        </div></div>
       </div>
     </div>
   </header>
 
   <main>
     <section class="section">
-      <div class="container narrow content">
-    <section id="overview">
+      <div class="container is-max-desktop">
+      <div class="columns is-centered"><div class="column is-full-width left content">
+    <div class="intro">
         <img class="hero-media" src="assets/media/teaser.webp" alt="HA-VLN diagram connecting an instruction, human-populated scene, observations, decisions, and route execution.">
-        <p class="welcome">Welcome to RoboWorld 2026 Track 2.</p>
-        <h2 class="title is-3">🌍 Challenge Overview</h2>
-        <p>HA-VLN asks an embodied agent to follow natural-language route instructions in indoor scenes populated by dynamic people. Success requires both navigation progress and socially safe behavior. Official evaluation replays action sequences in the released HA-VLN 2.0 Habitat 0.1.7 runtime.</p>
-        <p><strong>🏆 Prize Pool: $2,800</strong> · Certificates and a Rising Star Award are also offered.</p>
-    </section>
+        <p class="welcome">👋 Welcome to <b>Track <span class="world">#2</span>: HA-VLN</b> of the <a href="https://roboworld2026.github.io/" target="_blank" rel="noopener noreferrer"><b>RoboWorld Challenge 2026</b></a>!</p>
+        <p>Navigation among people calls for more than reaching a destination: an agent must understand route instructions while reacting safely to moving humans. HA-VLN brings these demands together in photorealistic indoor and outdoor environments.</p>
+        <p class="prize-summary">🏆 <b>Prize Pool:</b> <b>$2,800</b> per track (1st: <b>$1,500</b> &middot; 2nd: <b>$800</b> &middot; 3rd: <b>$500</b>) + Rising Star Award</p>
+    </div>
     <hr>
+    <section id="overview">
+        <h2 class="title is-3">🌍 Challenge Overview</h2>
+        <p>HA-VLN asks an embodied agent to follow natural-language route instructions through photorealistic 3D environments populated by dynamic people. Success requires both navigation progress and socially safe behavior. Official evaluation replays action sequences in the released HA-VLN 2.0 Habitat 0.1.7 runtime.</p>
+    </section>
 
     <section id="task">
         <h2 class="title is-3">🎯 Task Definition</h2>
@@ -46,14 +52,14 @@
           <table class="table is-bordered is-striped is-hoverable is-fullwidth">
             <thead><tr><th>Component</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td>Input</td><td>Episode ID, initial position and yaw, navigation instruction, and released human-aware episode inputs.</td></tr>
-              <tr><td>Output</td><td>One ordered action sequence for each official episode ID.</td></tr>
-              <tr><td>Action Space</td><td><code>STOP</code>, <code>MOVE_FORWARD</code>, <code>TURN_LEFT</code>, <code>TURN_RIGHT</code>, <code>LOOK_UP</code>, and <code>LOOK_DOWN</code>.</td></tr>
-              <tr><td>Setting</td><td>Human-populated indoor scenes; action sequences are replayed in the released HA-VLN 2.0 Habitat 0.1.7 runtime.</td></tr>
+              <tr><td><b>Input</b></td><td>Episode ID, initial position and yaw, navigation instruction, and released human-aware episode inputs.</td></tr>
+              <tr><td><b>Output</b></td><td>One ordered action sequence for each official episode ID.</td></tr>
+              <tr><td><b>Action Space</b></td><td>STOP, MOVE_FORWARD, TURN_LEFT, TURN_RIGHT, LOOK_UP, and LOOK_DOWN.</td></tr>
+              <tr><td><b>Setting</b></td><td>Continuous human-populated 3D environments; action sequences are replayed in the released HA-VLN 2.0 Habitat 0.1.7 runtime.</td></tr>
             </tbody>
           </table>
         </div>
-        <p>See the <a href="https://github.com/JostarXiong/roboworld2026-track2/blob/main/README.md">participant README</a> for the action-sequence format and optional local replay instructions.</p>
+        <p>See the <a href="https://github.com/F1y1113/havln-challenge/blob/main/README.md">participant README</a> for the action-sequence format and optional local replay instructions.</p>
     </section>
     <hr>
 
@@ -72,15 +78,7 @@
           <tr><td>🥈 2nd</td><td>$800 + certificate</td></tr>
           <tr><td>🥉 3rd</td><td>$500 + certificate</td></tr>
         </tbody></table></div>
-        <h3 class="title is-5 section-subtitle">🗓️ Timeline</h3>
-        <div class="table-container"><table class="table is-bordered is-striped is-hoverable is-fullwidth"><thead><tr><th>Event</th><th>Date</th></tr></thead><tbody>
-          <tr><td>Phase 1 opens</td><td>September 30, 2026, 16:00 UTC</td></tr>
-          <tr><td>Phase 1 deadline</td><td>October 31, 2026, 15:59 UTC</td></tr>
-          <tr><td>Phase 2 opens</td><td>November 2026; exact time to be confirmed</td></tr>
-          <tr><td>Phase 2 deadline</td><td>November 20, 2026; exact time to be confirmed</td></tr>
-          <tr><td>Awards</td><td>December 2026</td></tr>
-        </tbody></table></div>
-        <p>See the <a href="https://roboworld2026.github.io/">RoboWorld event site</a> for Rising Star Award details and schedule updates.</p>
+        <p>See the <a href="https://roboworld2026.github.io/">RoboWorld event site</a> for Rising Star Award details.</p>
     </section>
     <hr>
 
@@ -96,30 +94,96 @@
           </table>
         </div>
         <p>Both phases use the same six-action JSON contract and Score. Results are not combined.</p>
+        <h3 class="title is-5 section-subtitle timeline-title">🗓️ Timeline</h3>
+        <div class="table-container"><table class="table is-bordered is-striped is-hoverable is-fullwidth"><thead><tr><th>Event</th><th>Date</th></tr></thead><tbody>
+          <tr><td>Phase 1 opens</td><td>September 30, 2026, 16:00 UTC</td></tr>
+          <tr><td>Phase 1 deadline</td><td>October 31, 2026, 15:59 UTC</td></tr>
+          <tr><td>Phase 2 opens</td><td>November 2026; exact time to be confirmed</td></tr>
+          <tr><td>Phase 2 deadline</td><td>November 20, 2026; exact time to be confirmed</td></tr>
+          <tr><td>Awards</td><td>December 2026</td></tr>
+        </tbody></table></div>
+        <p>Follow the <a href="https://www.codabench.org/competitions/18135/">competition page</a> for any schedule updates.</p>
     </section>
     <hr>
 
     <section id="dataset">
         <h2 class="title is-3">📊 Dataset</h2>
-        <p>The task combines HA-R2R route instructions with HAPS 2.0 human activity in Matterport3D indoor scenes. Matterport3D scenes require separate access under their own license.</p>
-        <p>Phase 1 submissions must cover every episode in both released validation splits:</p>
+        <p>The task combines HA-R2R route instructions with HAPS 2.0 human activity across indoor and outdoor areas of Matterport3D scenes. Matterport3D scenes require separate access under their own license.</p>
+        <p>HA-R2R contains 16,844 instructions across 90 scenes:</p>
         <div class="table-container">
           <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-            <thead><tr><th>Phase 1 split</th><th>Required episodes</th></tr></thead>
+            <thead><tr><th>HA-R2R split</th><th>Instructions</th></tr></thead>
             <tbody>
-              <tr><td><code>val_seen</code></td><td>778</td></tr>
-              <tr><td><code>val_unseen</code></td><td>1,839</td></tr>
+              <tr><td>Train</td><td>10,819</td></tr>
+              <tr><td>Validation Seen (<code>val_seen</code>)</td><td>778</td></tr>
+              <tr><td>Validation Unseen (<code>val_unseen</code>)</td><td>1,839</td></tr>
+              <tr><td>Test</td><td>3,408</td></tr>
+              <tr><td>Total</td><td>16,844</td></tr>
             </tbody>
           </table>
         </div>
-        <p>Use the official episode manifests for identifiers. Data preparation and simulator details are in the <a href="https://github.com/JostarXiong/roboworld2026-track2/blob/main/README.md">participant README</a>.</p>
+        <p>HAPS 2.0 provides 910 human models and 486 motion sequences of 120 frames each. Phase 1 submissions must cover all 778 <code>val_seen</code> and 1,839 <code>val_unseen</code> episodes; Phase 2 provides test inputs for final evaluation while reference trajectories and collision annotations remain withheld. Use the official episode manifests for identifiers; data preparation and simulator details are in the <a href="https://github.com/F1y1113/havln-challenge/blob/main/README.md">participant README</a>.</p>
         <img class="wide-media" loading="lazy" src="assets/media/simulator.webp" alt="HAPS2.0 simulator pipeline from human activity annotation to real-time dynamic rendering.">
+        <h3 class="title is-4 dataset-examples-title">🎬 Dataset Examples</h3>
+        <p>These released HA-VLN 2.0 clips illustrate dynamic human activities and multi-human interactions in photorealistic scenes.</p>
+        <div class="dataset-feature">
+          <h4 class="title is-5">Multiple people in one scene</h4>
+          <video autoplay loop muted playsinline controls preload="metadata" aria-label="HA-VLN 2.0 scene with multiple gray-model people moving indoors">
+            <source src="assets/media/scene-diversity.mp4" type="video/mp4">
+            Your browser does not support MP4 video.
+          </video>
+          <p>Several people share the same indoor scene, making the changing human context visible.</p>
+        </div>
+        <div class="columns is-variable is-5 dataset-example-columns">
+          <div class="column is-half dataset-example">
+            <h4 class="title is-5">Phone pacing</h4>
+            <video autoplay loop muted playsinline controls preload="metadata" aria-label="HA-VLN 2.0 gray-model person walking while using a phone">
+              <source src="assets/media/demo-3.mp4" type="video/mp4">
+              Your browser does not support MP4 video.
+            </video>
+            <p>A person walks while using a phone, creating a moving social cue.</p>
+          </div>
+          <div class="column is-half dataset-example">
+            <h4 class="title is-5">Running and stopping</h4>
+            <video autoplay loop muted playsinline controls preload="metadata" aria-label="HA-VLN 2.0 gray-model person running and stopping">
+              <source src="assets/media/demo-4.mp4" type="video/mp4">
+              Your browser does not support MP4 video.
+            </video>
+            <p>Faster motion and a sudden stop change the space available for navigation.</p>
+          </div>
+        </div>
+        <p class="media-credit">Released HA-VLN 2.0 media from the <a href="https://uwmilab.github.io/HA-VLN-webpage/">project page</a> and <a href="https://github.com/UWMILab/HA-VLN/tree/main/demo/vids">code repository</a>. Explore more scenes and activities on the <a href="https://uwmilab.github.io/HA-VLN-webpage/#demos">HA-VLN 2.0 demo page</a>.</p>
+    </section>
+    <hr>
+
+    <section id="navigation-demos">
+        <h2 class="title is-3">🎬 Navigation Visualization</h2>
+        <p>Two released HA-VLN 2.0 examples show how human activity becomes part of a navigation instruction.</p>
+        <div class="columns is-variable is-5 demo-columns">
+          <div class="column is-half demo-example">
+            <h3 class="title is-5">Navigation Demo 1</h3>
+            <video autoplay loop muted playsinline controls preload="metadata" aria-label="Navigation Demo 1: navigating past people in a lounge">
+              <source src="assets/media/nav1.mp4" type="video/mp4">
+              Your browser does not support MP4 video.
+            </video>
+            <p><b>Navigation Instruction:</b> Start by moving forward in the lounge area, <b>where an individual is engaged in a phone conversation while pacing back and forth</b>. Navigate carefully to avoid crossing their path. As you proceed, you will pass by a television mounted on the wall. Continue your movement, <b>observing people relaxing and watching the TV, some seated comfortably on sofas</b>. Further along, <b>notice a group of friends raising their glasses in a toast, enjoying cocktails together</b>. Maintain a steady course, ensuring you do not disrupt their gathering. Finally, reach the end of your path where a potted plant is situated next to a door. Stop at this location, positioning yourself near the plant and door without obstructing access.</p>
+          </div>
+          <div class="column is-half demo-example">
+            <h3 class="title is-5">Navigation Demo 2</h3>
+            <video autoplay loop muted playsinline controls preload="metadata" aria-label="Navigation Demo 2: navigating past people performing activities indoors">
+              <source src="assets/media/nav2.mp4" type="video/mp4">
+              Your browser does not support MP4 video.
+            </video>
+            <p><b>Navigation Instruction:</b> Exit the room and make a left turn. Proceed down the hallway <b>where an individual is ironing clothes, carefully smoothing out wrinkles on garments</b>. Continue walking and make another left turn. Enter the next room, which is a bedroom. Inside, <b>someone is comfortably seated in bed, engrossed in reading a book</b>. Move past the bed, ensuring not to disturb the reader. Turn left again to enter the bathroom. Once inside, position yourself near the sink and wait there, observing the surroundings without interfering with any activities.</p>
+          </div>
+        </div>
+        <p class="media-credit">Videos and instructions from the <a href="https://github.com/UWMILab/HA-VLN/tree/main/demo">HA-VLN 2.0 repository</a>.</p>
     </section>
     <hr>
 
     <section id="baseline">
         <h2 class="title is-3">🧠 CMA Baseline</h2>
-        <p>We provide HA-VLN-CMA, a cross-modal attention navigation model from the released HA-VLN 2.0 project, as a reference baseline. Participants may use any method that exports legal action sequences. The <a href="https://github.com/UWMILab/HA-VLN">original code</a>, <a href="https://arxiv.org/abs/2503.14229">paper</a>, and <a href="https://github.com/JostarXiong/roboworld2026-track2/blob/main/README.md">participant README</a> provide implementation details and validation results.</p>
+        <p>We provide HA-VLN-CMA, a cross-modal attention navigation model from the released HA-VLN 2.0 project, as a reference baseline. Participants may use any method that exports legal action sequences. The <a href="https://github.com/UWMILab/HA-VLN">original code</a>, <a href="https://arxiv.org/abs/2503.14229">paper</a>, and <a href="https://github.com/F1y1113/havln-challenge/blob/main/README.md">participant README</a> provide implementation details and validation results.</p>
     </section>
     <hr>
 
@@ -129,26 +193,26 @@
           <table class="table is-bordered is-striped is-hoverable is-fullwidth">
             <thead><tr><th>Metric</th><th>Direction</th><th>Meaning</th></tr></thead>
             <tbody>
-              <tr><td>SR</td><td>Higher</td><td>Collision-free navigation success rate.</td></tr>
-              <tr><td>NE</td><td>Lower</td><td>Mean final distance to the goal.</td></tr>
-              <tr><td>CR</td><td>Lower</td><td>Collision-episode rate, normalized by the human-influenced episode count.</td></tr>
-              <tr><td>TCR</td><td>Lower</td><td>Mean adjusted collision count per episode.</td></tr>
+              <tr><td>SR (Success Rate)</td><td>Higher</td><td>Collision-free navigation success rate.</td></tr>
+              <tr><td>NE (Navigation Error)</td><td>Lower</td><td>Mean final distance to the goal.</td></tr>
+              <tr><td>CR (Collision Rate)</td><td>Lower</td><td>Collision-episode rate, normalized by the human-influenced episode count.</td></tr>
+              <tr><td>TCR (Total Collision Rate)</td><td>Lower</td><td>Mean adjusted collision count per episode.</td></tr>
             </tbody>
           </table>
         </div>
-        <h3 class="title is-5 section-subtitle">🏁 Composite Score</h3>
+        <div class="score-panel"><h3 class="title is-5 section-subtitle">🏁 Composite Score</h3>
         <div class="score-box">
           <p>Navigation = 0.80 × SR + 0.20 × 3 / (3 + NE)</p>
           <p>Social = 0.75 × (1 − CR) + 0.25 × 1 / (1 + TCR)</p>
           <strong>Score = 100 × Navigation × (0.70 + 0.30 × Social)</strong>
-        </div>
-        <p>Higher full-precision Score ranks first. Ties use higher SR, lower NE, lower CR, lower TCR, then earlier submission time. See the <a href="https://github.com/JostarXiong/roboworld2026-track2/blob/main/README.md">participant README</a> for metric definitions.</p>
+        </div></div>
+        <p>Higher full-precision Score ranks first. Ties use higher SR, lower NE, lower CR, lower TCR, then earlier submission time. See the <a href="https://github.com/F1y1113/havln-challenge/blob/main/README.md">participant README</a> for metric definitions.</p>
     </section>
     <hr>
 
     <section id="contact-resources">
         <h2 class="title is-3">🔗 Contact and Resources</h2>
-        <p>For technical questions, <a href="https://github.com/JostarXiong/roboworld2026-track2/issues">open an issue in the challenge repository</a>. For competition inquiries, email <a href="mailto:roboworld2026@outlook.com">roboworld2026@outlook.com</a>.</p>
+        <p>For technical questions, <a href="https://github.com/F1y1113/havln-challenge/issues">open an issue in the challenge repository</a>. For competition inquiries, email <a href="mailto:roboworld2026@outlook.com">roboworld2026@outlook.com</a>.</p>
         <div class="table-container">
           <table class="table is-bordered is-striped is-hoverable is-fullwidth">
             <thead><tr><th>Resource</th><th>Link</th></tr></thead>
@@ -156,7 +220,7 @@
               <tr><td>Event and registration</td><td><a href="https://roboworld2026.github.io/">RoboWorld 2026</a></td></tr>
               <tr><td>Starting kits, submissions, and leaderboard</td><td><a href="https://www.codabench.org/competitions/18135/">CodaBench</a></td></tr>
               <tr><td>Joint workshop</td><td><a href="https://robotpad2026.github.io/">RoboPAD at NeurIPS 2026</a></td></tr>
-              <tr><td>Challenge toolkit and instructions</td><td><a href="https://github.com/JostarXiong/roboworld2026-track2">GitHub repository</a></td></tr>
+              <tr><td>Challenge toolkit and instructions</td><td><a href="https://github.com/F1y1113/havln-challenge">GitHub repository</a></td></tr>
               <tr><td>HA-VLN 2.0 Get Started</td><td><a href="https://jostarxiong.github.io/havln2-docs/">Get Started guide</a></td></tr>
               <tr><td>HA-VLN 2.0 media</td><td><a href="https://uwmilab.github.io/HA-VLN-webpage/">Project page</a></td></tr>
               <tr><td>HA-VLN 2.0 code</td><td><a href="https://github.com/UWMILab/HA-VLN">Source repository</a></td></tr>
@@ -172,7 +236,7 @@
         <p><strong>1. Must I use CMA?</strong><br>No. Any method may participate if it exports valid official action sequences.</p>
         <p><strong>2. What do I upload?</strong><br>Only a ZIP containing the required JSON predictions. Awarded teams may later be asked for method, code, or model details to verify their results and contribute to a technical report.</p>
         <p><strong>3. Are look actions valid?</strong><br>Yes. <code>LOOK_UP</code> and <code>LOOK_DOWN</code> are official actions and count toward the action budget.</p>
-        <p><strong>4. Where are the datasets?</strong><br>See the <a href="https://github.com/JostarXiong/roboworld2026-track2/blob/main/README.md">participant README</a>. Request Matterport3D access through its <a href="https://niessner.github.io/Matterport/">official site</a>.</p>
+        <p><strong>4. Where are the datasets?</strong><br>See the <a href="https://github.com/F1y1113/havln-challenge/blob/main/README.md">participant README</a>. Request Matterport3D access through its <a href="https://niessner.github.io/Matterport/">official site</a>.</p>
         <p><strong>5. Which replay determines my score?</strong><br>Only the CodaBench replay of the submitted ZIP determines the official score. Local replay is for development.</p>
         <p><strong>6. What if my submission is rejected?</strong><br>Use the format checker in the CodaBench starting kit and consult the <a href="https://www.codabench.org/competitions/18135/">Submission &amp; Evaluation page</a> for validation and scoring-log explanations.</p>
     </section>
@@ -186,10 +250,10 @@
 
     <section id="citation">
         <h2 class="title is-3">📚 Citation</h2>
-        <pre><code>@misc{dong2025havln20openbenchmark,
+        <pre><code>@misc{dong2026havln20openbenchmark,
   title={HA-VLN 2.0: An Open Benchmark and Leaderboard for Human-Aware Navigation in Discrete and Continuous Environments with Dynamic Multi-Human Interactions},
-  author={Yifei Dong and Fengyi Wu and Qi He and Zhi-Qi Cheng and Heng Li and Minghan Li and Zebang Cheng and Yuxuan Zhou and Jingdong Sun and Qi Dai and Alexander G. Hauptmann},
-  year={2025},
+  author={Yifei Dong and Fengyi Wu and Qi He and Lingdong Kong and Heng Li and Minghan Li and Zebang Cheng and Yuxuan Zhou and Jingdong Sun and Qi Dai and Alexander G Hauptmann and Zhi-Qi Cheng},
+  year={2026},
   eprint={2503.14229},
   archivePrefix={arXiv},
   primaryClass={cs.AI},
@@ -200,22 +264,22 @@
   title={Track 2 | HA-VLN: Human-Aware Vision-and-Language Navigation},
   author={RoboWorld Challenge 2026 Organizers},
   year={2026},
-  howpublished={https://jostarxiong.github.io/roboworld2026-track2/}
+  howpublished={https://f1y1113.github.io/havln-challenge/}
 }</code></pre>
     </section>
-      </div>
+      </div></div></div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="container narrow">
+    <div class="container is-max-desktop">
       <p>Copyright &copy; <span class="robo">Robo</span><span class="world">World</span> 2026 All Rights Reserved.</p>
       <p>Track 2: HA-VLN · Jointly held with the RoboPAD Workshop at NeurIPS 2026</p>
       <p>Challenge page content is shared under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, subject to the separate licenses of third-party paper figures and media.</p>
     </div>
   </footer>
   <script>
-    const backToTop = document.querySelector('.back-to-top');
+    const backToTop = document.getElementById('backToTopBtn');
     const updateBackToTop = () => backToTop.classList.toggle('visible', window.scrollY > 200);
     window.addEventListener('scroll', updateBackToTop, { passive: true });
     updateBackToTop();
