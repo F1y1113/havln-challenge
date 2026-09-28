@@ -85,20 +85,25 @@ The challenge uses released HA-VLN 2.0 resources: HA-R2R navigation episodes
 and instructions, HAPS2.0 human assets, multi-human annotations, and licensed
 Matterport3D scenes. Challenge datasets are external to the Docker image.
 
-| HA-R2R split | Distinct trajectories | Episodes / instructions | Human-influenced episodes ($\beta L$) |
-|:--|--:|--:|--:|
-| Train | 3,603 | 10,819 | — |
-| `val_seen` | 259 | 778 | 682 |
-| `val_unseen` | 613 | 1,839 | 1,593 |
+| HA-R2R split | Instructions |
+|:--|--:|
+| Train | 10,819 |
+| Validation Seen (`val_seen`) | 778 |
+| Validation Unseen (`val_unseen`) | 1,839 |
+| Test | 3,408 |
+| Total | 16,844 |
 
-Distinct trajectories are counted by `trajectory_id` within each released
-split; each episode requires its own action sequence.
+Across the released train, `val_seen`, and `val_unseen` splits, the distinct
+`trajectory_id` counts are 3,603, 259, and 613, respectively. The released
+human-influenced validation counts ($\beta L$) are 682 for `val_seen` and
+1,593 for `val_unseen`. Each episode requires its own action sequence.
 
 Phase 1 requires one action sequence for each of the 778 `val_seen` and 1,839
-`val_unseen` episodes. The complete HA-R2R benchmark contains 16,844
-instructions across 90 scenes. Its HAPS2.0 assets comprise 910 placed human
-models drawn from 486 motion sequences of 120 frames each. Final-phase episode
-identities and submission coverage will be supplied with that phase's bundle.
+`val_unseen` episodes. The complete HA-R2R benchmark spans 90 scenes. Its
+HAPS 2.0 assets comprise 910 human models and 486 motion sequences of 120
+frames each. The published test split size does not expose its scoring data:
+Phase 2 participant inputs will be supplied separately, while the reference
+trajectories and collision annotations used for scoring remain withheld.
 
 ```text
 /data/havln2/
@@ -295,15 +300,18 @@ scores.
 ## 🧠 Baseline Model
 
 CMA is the released VLN-CE cross-modal attention reference adapted by HA-VLN
-2.0. The paper also evaluates HA-VLN-VL, BEVBert and ETPNav as comparison
-methods; CMA is the executable challenge reference, not a required architecture.
+2.0. The paper proposes two human-aware baseline agents, HA-VLN-CMA and
+HA-VLN-VL. CMA is the executable challenge reference, not a required
+architecture. The paper also evaluates external comparison methods.
 
 | Model | Role | Main approach |
 |:--|:--|:--|
 | HA-VLN-CMA | Challenge reference | Cross-modal attention over instruction and observations. |
-| HA-VLN-VL | Paper comparison | Vision-language navigation baseline adapted to human-aware scenes. |
-| BEVBert | Paper comparison | Bird's-eye-view language-conditioned navigation. |
-| ETPNav | Paper comparison | Topological navigation with exploration and planning. |
+| HA-VLN-VL | Paper-proposed baseline | Vision-language navigation adapted to human-aware scenes. |
+| BEVBert | External comparison | Bird's-eye-view language-conditioned navigation. |
+| ETPNav | External comparison | Topological navigation with exploration and planning. |
+| NaVid | External zero-shot comparison | Vision-language navigation with a multimodal model. |
+| NaVILA | External zero-shot comparison | Vision-language-action navigation with a multimodal model. |
 
 Organizer re-evaluation of the public CMA validation checkpoint produced:
 
@@ -320,10 +328,10 @@ checkpoint, runtime, or evaluation details.
 
 | Metric | Direction | Meaning |
 |:--|:--|:--|
-| SR | Higher | Collision-free success rate over all episodes. |
-| NE | Lower | Mean final navigation error in metres. |
-| CR | Lower | Collision-episode rate over released human-influenced episodes. |
-| TCR | Lower | Mean adjusted human-collision count over all episodes. |
+| SR (Success Rate) | Higher | Collision-free success rate over all episodes. |
+| NE (Navigation Error) | Lower | Mean final navigation error in metres. |
+| CR (Collision Rate) | Lower | Collision-episode rate over released human-influenced episodes. |
+| TCR (Total Collision Rate) | Lower | Mean adjusted human-collision count over all episodes. |
 
 Let $L$ be the number of episodes, $s_i$ the navigation-success indicator,
 $d_i$ the final goal distance, and $e_i$ the adjusted human-collision count.
@@ -473,10 +481,10 @@ governed by the Terms displayed on the official CodaBench competition.
 If you use HA-VLN 2.0 or this challenge toolkit, cite the benchmark paper:
 
 ```bibtex
-@misc{dong2025havln20openbenchmark,
+@misc{dong2026havln20openbenchmark,
   title={HA-VLN 2.0: An Open Benchmark and Leaderboard for Human-Aware Navigation in Discrete and Continuous Environments with Dynamic Multi-Human Interactions},
-  author={Yifei Dong and Fengyi Wu and Qi He and Zhi-Qi Cheng and Heng Li and Minghan Li and Zebang Cheng and Yuxuan Zhou and Jingdong Sun and Qi Dai and Alexander G. Hauptmann},
-  year={2025},
+  author={Yifei Dong and Fengyi Wu and Qi He and Lingdong Kong and Heng Li and Minghan Li and Zebang Cheng and Yuxuan Zhou and Jingdong Sun and Qi Dai and Alexander G Hauptmann and Zhi-Qi Cheng},
+  year={2026},
   eprint={2503.14229},
   archivePrefix={arXiv},
   primaryClass={cs.AI},

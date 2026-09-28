@@ -109,17 +109,20 @@
     <section id="dataset">
         <h2 class="title is-3">📊 Dataset</h2>
         <p>The task combines HA-R2R route instructions with HAPS 2.0 human activity across indoor and outdoor areas of Matterport3D scenes. Matterport3D scenes require separate access under their own license.</p>
-        <p>Phase 1 submissions must cover every episode in both released validation splits:</p>
+        <p>HA-R2R contains 16,844 instructions across 90 scenes:</p>
         <div class="table-container">
           <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-            <thead><tr><th>Phase 1 split</th><th>Required episodes</th></tr></thead>
+            <thead><tr><th>HA-R2R split</th><th>Instructions</th></tr></thead>
             <tbody>
-              <tr><td><code>val_seen</code></td><td>778</td></tr>
-              <tr><td><code>val_unseen</code></td><td>1,839</td></tr>
+              <tr><td>Train</td><td>10,819</td></tr>
+              <tr><td>Validation Seen (<code>val_seen</code>)</td><td>778</td></tr>
+              <tr><td>Validation Unseen (<code>val_unseen</code>)</td><td>1,839</td></tr>
+              <tr><td>Test</td><td>3,408</td></tr>
+              <tr><td>Total</td><td>16,844</td></tr>
             </tbody>
           </table>
         </div>
-        <p>Use the official episode manifests for identifiers. Data preparation and simulator details are in the <a href="https://github.com/F1y1113/havln-challenge/blob/main/README.md">participant README</a>.</p>
+        <p>HAPS 2.0 provides 910 human models and 486 motion sequences of 120 frames each. Phase 1 submissions must cover all 778 <code>val_seen</code> and 1,839 <code>val_unseen</code> episodes. The published test count does not expose Phase 2 scoring references: participant inputs will be supplied separately, while reference trajectories and collision annotations remain withheld. Use the official episode manifests for identifiers; data preparation and simulator details are in the <a href="https://github.com/F1y1113/havln-challenge/blob/main/README.md">participant README</a>.</p>
         <img class="wide-media" loading="lazy" src="assets/media/simulator.webp" alt="HAPS2.0 simulator pipeline from human activity annotation to real-time dynamic rendering.">
         <h3 class="title is-4 dataset-examples-title">🎬 Dataset Examples</h3>
         <p>These released HA-VLN 2.0 clips show people moving and interacting in photorealistic scenes; they illustrate the human-aware setting, not a participant agent's performance.</p>
@@ -190,10 +193,10 @@
           <table class="table is-bordered is-striped is-hoverable is-fullwidth">
             <thead><tr><th>Metric</th><th>Direction</th><th>Meaning</th></tr></thead>
             <tbody>
-              <tr><td>SR</td><td>Higher</td><td>Collision-free navigation success rate.</td></tr>
-              <tr><td>NE</td><td>Lower</td><td>Mean final distance to the goal.</td></tr>
-              <tr><td>CR</td><td>Lower</td><td>Collision-episode rate, normalized by the human-influenced episode count.</td></tr>
-              <tr><td>TCR</td><td>Lower</td><td>Mean adjusted collision count per episode.</td></tr>
+              <tr><td>SR (Success Rate)</td><td>Higher</td><td>Collision-free navigation success rate.</td></tr>
+              <tr><td>NE (Navigation Error)</td><td>Lower</td><td>Mean final distance to the goal.</td></tr>
+              <tr><td>CR (Collision Rate)</td><td>Lower</td><td>Collision-episode rate, normalized by the human-influenced episode count.</td></tr>
+              <tr><td>TCR (Total Collision Rate)</td><td>Lower</td><td>Mean adjusted collision count per episode.</td></tr>
             </tbody>
           </table>
         </div>
@@ -247,10 +250,10 @@
 
     <section id="citation">
         <h2 class="title is-3">📚 Citation</h2>
-        <pre><code>@misc{dong2025havln20openbenchmark,
+        <pre><code>@misc{dong2026havln20openbenchmark,
   title={HA-VLN 2.0: An Open Benchmark and Leaderboard for Human-Aware Navigation in Discrete and Continuous Environments with Dynamic Multi-Human Interactions},
-  author={Yifei Dong and Fengyi Wu and Qi He and Zhi-Qi Cheng and Heng Li and Minghan Li and Zebang Cheng and Yuxuan Zhou and Jingdong Sun and Qi Dai and Alexander G. Hauptmann},
-  year={2025},
+  author={Yifei Dong and Fengyi Wu and Qi He and Lingdong Kong and Heng Li and Minghan Li and Zebang Cheng and Yuxuan Zhou and Jingdong Sun and Qi Dai and Alexander G Hauptmann and Zhi-Qi Cheng},
+  year={2026},
   eprint={2503.14229},
   archivePrefix={arXiv},
   primaryClass={cs.AI},
