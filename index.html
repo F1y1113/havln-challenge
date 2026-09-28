@@ -37,13 +37,13 @@
     <div class="intro">
         <img class="hero-media" src="assets/media/teaser.webp" alt="HA-VLN diagram connecting an instruction, human-populated scene, observations, decisions, and route execution.">
         <p class="welcome">👋 Welcome to <b>Track <span class="world">#2</span>: HA-VLN</b> of the <a href="https://roboworld2026.github.io/" target="_blank" rel="noopener noreferrer"><b>RoboWorld Challenge 2026</b></a>!</p>
-        <p>Navigation among people calls for more than reaching a destination: an agent must understand route instructions while reacting safely to moving humans. HA-VLN brings these demands together in photorealistic indoor environments.</p>
+        <p>Navigation among people calls for more than reaching a destination: an agent must understand route instructions while reacting safely to moving humans. HA-VLN brings these demands together in photorealistic indoor and outdoor environments.</p>
         <p class="prize-summary">🏆 <b>Prize Pool:</b> <b>$2,800</b> per track (1st: <b>$1,500</b> &middot; 2nd: <b>$800</b> &middot; 3rd: <b>$500</b>) + Rising Star Award</p>
     </div>
     <hr>
     <section id="overview">
         <h2 class="title is-3">🌍 Challenge Overview</h2>
-        <p>HA-VLN asks an embodied agent to follow natural-language route instructions in indoor scenes populated by dynamic people. Success requires both navigation progress and socially safe behavior. Official evaluation replays action sequences in the released HA-VLN 2.0 Habitat 0.1.7 runtime.</p>
+        <p>HA-VLN asks an embodied agent to follow natural-language route instructions through indoor and outdoor spaces populated by dynamic people. Success requires both navigation progress and socially safe behavior. Official evaluation replays action sequences in the released HA-VLN 2.0 Habitat 0.1.7 runtime.</p>
     </section>
 
     <section id="task">
@@ -55,7 +55,7 @@
               <tr><td><b>Input</b></td><td>Episode ID, initial position and yaw, navigation instruction, and released human-aware episode inputs.</td></tr>
               <tr><td><b>Output</b></td><td>One ordered action sequence for each official episode ID.</td></tr>
               <tr><td><b>Action Space</b></td><td>STOP, MOVE_FORWARD, TURN_LEFT, TURN_RIGHT, LOOK_UP, and LOOK_DOWN.</td></tr>
-              <tr><td><b>Setting</b></td><td>Human-populated indoor scenes; action sequences are replayed in the released HA-VLN 2.0 Habitat 0.1.7 runtime.</td></tr>
+              <tr><td><b>Setting</b></td><td>Human-populated indoor and outdoor areas; action sequences are replayed in the released HA-VLN 2.0 Habitat 0.1.7 runtime.</td></tr>
             </tbody>
           </table>
         </div>
@@ -108,7 +108,7 @@
 
     <section id="dataset">
         <h2 class="title is-3">📊 Dataset</h2>
-        <p>The task combines HA-R2R route instructions with HAPS 2.0 human activity in Matterport3D indoor scenes. Matterport3D scenes require separate access under their own license.</p>
+        <p>The task combines HA-R2R route instructions with HAPS 2.0 human activity across indoor and outdoor areas of Matterport3D scenes. Matterport3D scenes require separate access under their own license.</p>
         <p>Phase 1 submissions must cover every episode in both released validation splits:</p>
         <div class="table-container">
           <table class="table is-bordered is-striped is-hoverable is-fullwidth">
@@ -122,7 +122,7 @@
         <p>Use the official episode manifests for identifiers. Data preparation and simulator details are in the <a href="https://github.com/F1y1113/havln-challenge/blob/main/README.md">participant README</a>.</p>
         <img class="wide-media" loading="lazy" src="assets/media/simulator.webp" alt="HAPS2.0 simulator pipeline from human activity annotation to real-time dynamic rendering.">
         <h3 class="title is-4 dataset-examples-title">🎬 Dataset Examples</h3>
-        <p>These released HA-VLN 2.0 clips show people moving and interacting in indoor scenes; they illustrate the human-aware setting, not a participant agent's performance.</p>
+        <p>These released HA-VLN 2.0 clips show people moving and interacting in photorealistic scenes; they illustrate the human-aware setting, not a participant agent's performance.</p>
         <div class="dataset-feature">
           <h4 class="title is-5">Multiple people in one scene</h4>
           <video autoplay loop muted playsinline controls preload="metadata" aria-label="HA-VLN 2.0 scene with multiple gray-model people moving indoors">

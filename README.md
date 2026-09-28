@@ -20,10 +20,11 @@
 
 ## 🌍 Challenge Overview
 
-HA-VLN evaluates instruction-following agents in continuous indoor environments
-populated by dynamic people. An agent must ground a natural-language route,
-reach its goal, and avoid human collisions. Official scoring replays submitted
-actions in the released HA-VLN 2.0 Habitat 0.1.7 runtime.
+HA-VLN evaluates instruction-following agents in continuous environments with
+indoor and outdoor areas populated by dynamic people. An agent must ground a
+natural-language route, reach its goal, and avoid human collisions. Official
+scoring replays submitted actions in the released HA-VLN 2.0 Habitat 0.1.7
+runtime.
 
 ### 🎯 Task Definition
 
