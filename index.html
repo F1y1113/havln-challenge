@@ -37,15 +37,20 @@
     <div class="intro">
         <img class="hero-media" src="assets/media/teaser.webp" alt="HA-VLN diagram connecting an instruction, human-populated scene, observations, decisions, and route execution.">
         <p class="welcome">👋 Welcome to <b>Track <span class="world">#2</span>: HA-VLN</b> of the <a href="https://roboworld2026.github.io/" target="_blank" rel="noopener noreferrer"><b>RoboWorld Challenge 2026</b></a>!</p>
-        <p>Robots in homes, workplaces, and other shared spaces must do more than reach a destination. An instruction such as &ldquo;walk past the person pacing on the phone&rdquo; requires an agent to connect language with human activity and navigate without colliding with the people around it.</p>
-        <p>Many vision-and-language navigation benchmarks focus on static scenes and object landmarks. <a href="https://arxiv.org/html/2503.14229v5">HA-VLN 2.0</a> brings human activity into both the instructions and the environment: people provide language cues, and their movements can change which route is safe. This challenge invites researchers to bring together language grounding, multimodal perception, and human-aware decision-making to address that gap.</p>
+        <p>This track challenges participants to develop <b>human-aware vision-and-language navigation agents</b> that follow natural-language instructions <b>safely, efficiently, and socially</b> in dynamic human environments.</p>
+        <p>While many standard VLN benchmarks assume static scenes, real-world spaces are shared with moving people who serve as both semantic landmarks and dynamic obstacles. Built on <a href="https://arxiv.org/abs/2503.14229">HA-VLN 2.0</a>, submissions must balance <b>instruction following</b> and <b>social compliance</b> under partial observability and real-time human interactions.</p>
         <p class="prize-summary">🏆 <b>Prize Pool:</b> <b>$2,800</b> per track (1st: <b>$1,500</b> &middot; 2nd: <b>$800</b> &middot; 3rd: <b>$500</b>) + Rising Star Award</p>
     </div>
     <hr>
     <section id="overview">
         <h2 class="title is-3">🌍 Challenge Overview</h2>
-        <p>HA-VLN asks an embodied agent to follow natural-language route instructions through photorealistic 3D environments populated by dynamic people. Success requires both navigation progress and socially safe behavior. Official evaluation replays action sequences in the released HA-VLN 2.0 Habitat 0.1.7 runtime.</p>
-        <p>We welcome navigation policies, waypoint and topological planners, world models, and vision-language-action approaches. The shared task and evaluation provide a common setting for testing how well these methods follow human-referenced instructions and navigate safely in unfamiliar scenes.</p>
+        <p>This track evaluates an embodied agent's ability to perform <b>socially compliant instruction following</b> in photorealistic 3D environments populated with dynamic human agents, without relying on static-world assumptions:</p>
+        <ul>
+          <li><b>Human-Referenced Grounding</b>: Interpret fine-grained instructions that reference both scene landmarks and ongoing human activities.</li>
+          <li><b>Social Norm Compliance</b>: Respect personal space, proactively avoid human collisions, and navigate safely around moving bystanders.</li>
+          <li><b>Realistic Benchmarking</b>: Navigate indoor and outdoor areas with multi-human interactions in the HA-R2R and HAPS 2.0 datasets.</li>
+        </ul>
+        <p>We welcome navigation policies, waypoint and topological planners, world models, and VLA approaches that advance safe, human-centered navigation in shared spaces.</p>
     </section>
 
     <section id="task">
