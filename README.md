@@ -20,11 +20,28 @@
 
 ## 🌍 Challenge Overview
 
+Robots in homes, workplaces, and other shared spaces must do more than reach
+a destination. An instruction such as "walk past the person pacing on the
+phone" requires an agent to connect language with human activity and navigate
+without colliding with the people around it.
+
+Many vision-and-language navigation benchmarks focus on static scenes and
+object landmarks. [HA-VLN 2.0](https://arxiv.org/html/2503.14229v5) brings
+human activity into both the instructions and the environment: people provide
+language cues, and their movements can change which route is safe. This
+challenge invites researchers to bring together language grounding,
+multimodal perception, and human-aware decision-making to address that gap.
+
 HA-VLN evaluates instruction-following agents in continuous environments with
 indoor and outdoor areas populated by dynamic people. An agent must ground a
 natural-language route, reach its goal, and avoid human collisions. Official
 scoring replays submitted actions in the released HA-VLN 2.0 Habitat 0.1.7
 runtime.
+
+We welcome navigation policies, waypoint and topological planners, world
+models, and vision-language-action approaches. The shared task and evaluation
+provide a common setting for testing how well these methods follow
+human-referenced instructions and navigate safely in unfamiliar scenes.
 
 ### 🎯 Task Definition
 
