@@ -193,7 +193,8 @@ dependencies while retaining the image's Habitat core. Re-enter with
 `docker start -ai havln-cma` after exiting. Keep this named container to reuse
 installed dependencies; removing it removes that installation, but not the
 mounted data, sources, or exported results. Data symlinks require their targets
-to be mounted too.
+to be mounted too. For scenes stored elsewhere, bind-mount them into a real
+`/data/havln2/scene_datasets/mp3d` directory rather than a nested directory symlink.
 
 ### 3. Run CMA and export the executed actions
 
