@@ -112,7 +112,7 @@ and collision annotations remain withheld.
 ├── Multi-Human-Annotations/human_motion.json
 ├── HAPS2_0/<released-human-assets>
 ├── scene_datasets/mp3d/<licensed-scene-assets>
-├── ddppo-models/<released-encoder-weights>.pth  # optional for CMA
+├── checkpoints/HA-VLN-CMA/ckpt.39.pth # optional reference policy
 └── recompute_navmesh/                 # writable replay cache
 ```
 
@@ -136,112 +136,116 @@ submission kit.
 
 ## 🚀 Getting Started
 
-### 1. Download released public data
+This walkthrough runs the released CMA checkpoint, records the actions actually
+executed, and produces a validated submission ZIP. You may instead use any agent
+that follows the [submission contract](#-submission-format).
 
-The helper requires an explicit destination. It downloads the public HA-R2R and
-HAPS2.0 packages plus the released validation collision baselines and human
-motion annotations from [HA-VLN 2.0](https://github.com/UWMILab/HA-VLN).
-Install `gdown` in your Python environment and have `unzip` and `curl`
-available before running:
+### 1. Download data and the CMA checkpoint
 
-```bash
-bash scripts/download_data.sh --destination /absolute/path/to/havln2-data
-```
-
-Add the separately licensed Matterport3D scenes as described above. For CMA or
-another baseline using a pretrained depth encoder, download the optional
-[DD-PPO weights](https://dl.fbaipublicfiles.com/habitat/data/baselines/v1/ddppo/ddppo-models.zip)
-to `ddppo-models/` following the [upstream instructions](https://github.com/UWMILab/HA-VLN#-download-dataset).
-`havln-check-data` checks replay data and scenes, not these optional weights.
-The required replay-data layout is shown in the Dataset section above.
-
-### 2. Run a baseline and export actions
-
-You may use any agent. For a concrete starting point, set up the released
-[HA-VLN 2.0 CMA baseline](https://github.com/UWMILab/HA-VLN) and follow the
-[CMA action-export hook](#cma-action-export-hook) below. Its original inference
-file contains positions, not the discrete actions required here. Record the
-actions as CMA takes them; do not infer actions from the saved positions.
-After adding the export hook, run inference for each public split from
-the upstream `agent/` directory:
+Use Python 3 and `curl` on a Linux/WSL filesystem to download from
+[Hugging Face](https://huggingface.co/datasets/fly1113/HA-VLN).
+The helper pins resource revisions, verifies SHA-256 checksums, resumes interrupted
+downloads, and extracts HAPS 2.0 into the required layout:
 
 ```bash
-python run.py --exp-config config/cma_pm_da_aug_tune.yaml --run-type inference \
-  INFERENCE.SPLIT val_seen
-python run.py --exp-config config/cma_pm_da_aug_tune.yaml --run-type inference \
-  INFERENCE.SPLIT val_unseen
+DATA_ROOT=/absolute/path/to/havln2-data
+bash scripts/download_data.sh --destination "$DATA_ROOT" --target all
 ```
 
-The hook writes `val_seen.json` and `val_unseen.json` with `format_version: 1`,
-official episode IDs, and the actions actually executed. The released CMA
-checkpoint may use only the four planar actions; these remain valid members of
-the challenge's six-action vocabulary.
+Use the Linux filesystem rather than a Windows-mounted drive for HAPS 2.0:
+released asset directory names contain colons.
 
-### 3. Package and check the submission
+`--target core` (the default) downloads replay data and human assets;
+`--target cma` downloads the checkpoint and its matching instruction-token inputs.
+Small annotation files come from the released GitHub repository. Add your
+separately licensed Matterport3D scenes under
+`$DATA_ROOT/scene_datasets/mp3d/<scan>/<scan>.glb`.
+For the older dataset mirrors, use `--source gdrive` with `gdown` installed;
+the CMA checkpoint still comes from Hugging Face. Existing files with a different
+checksum are rejected rather than overwritten.
 
-Download the Phase 1 Starting Kit from [CodaBench](https://www.codabench.org/competitions/18135/) and extract it. Its STOP-only
-sample provides every required episode ID and illustrates the schema; replace
-its actions with your predictions. From the extracted kit directory, run the
-standard-library checker without Docker:
+### 2. Start a development container and install CMA dependencies
+
+From this toolkit's root directory, create a named container with persistent
+data and output mounts:
 
 ```bash
-python3 check_submission.py sample_submission.zip
-PRED_DIR=/absolute/path/to/your-predictions
-zip -j submission.zip "$PRED_DIR/val_seen.json" "$PRED_DIR/val_unseen.json"
-python3 check_submission.py submission.zip
+IMAGE=ghcr.io/jostarxiong/havln-challenge-2026@sha256:e1a0544f66beaf5218cc9df63da51b4a1a22a6bf0471ca0c2f75e81ee02a6556
+WORK_ROOT=/absolute/path/to/havln-workspace
+mkdir -p "$DATA_ROOT" "$WORK_ROOT"
+docker pull "$IMAGE"
+docker run --name havln-cma --gpus all -it --shm-size 16g \
+  --mount type=bind,source="$DATA_ROOT",target=/data/havln2 \
+  --mount type=bind,source="$WORK_ROOT",target=/workspace \
+  --mount type=bind,source="$(pwd)",target=/toolkit,readonly \
+  "$IMAGE" bash
 ```
 
-The checker verifies format and exact episode coverage, but computes no Score.
-Upload that validated ZIP to CodaBench. For optional local simulator replay,
-use the immutable public image reference in the
-[Local Docker Replay](#-local-docker-replay) section below. Participant code can live anywhere;
-only the image's data mount uses `/data/havln2`.
+Inside the container:
 
-### CMA action-export hook
-
-The upstream `BaseILTrainer.inference()` writes position paths, not the
-discrete actions required for a submission. In your own HA-VLN checkout, edit
-`agent/VLN-CE/vlnce_baselines/common/base_il_trainer.py`. Immediately after
-`episode_predictions = defaultdict(list)`, add:
-
-```python
-action_traces = defaultdict(list)
-action_names = tuple(config.TASK_CONFIG.TASK.POSSIBLE_ACTIONS)
+```bash
+bash /toolkit/scripts/setup_cma.sh
+havln-check-data
 ```
 
-Replace `outputs = envs.step([a[0].item() for a in actions])` with:
+The setup script retrieves pinned public policy sources and installs the inference
+dependencies while retaining the image's Habitat core. Re-enter with
+`docker start -ai havln-cma` after exiting. Keep this named container to reuse
+installed dependencies; removing it removes that installation, but not the
+mounted data, sources, or exported results. Data symlinks require their targets
+to be mounted too.
 
-```python
-step_actions = [int(a[0].item()) for a in actions]
-for episode, action_id in zip(current_episodes, step_actions):
-    action_traces[str(episode.episode_id)].append(action_names[action_id])
-outputs = envs.step(step_actions)
+### 3. Run CMA and export the executed actions
+
+First run a diagnostic on two episodes **per split**:
+
+```bash
+python /toolkit/scripts/export_cma_submission.py \
+  --output-dir /workspace/cma-smoke --episode-limit 2
 ```
 
-Immediately after `envs.close()`, export the trace:
+This writes diagnostic JSON files only, not a submission ZIP.
+For the complete validation sets, run:
 
-```python
-split = config.INFERENCE.SPLIT
-with open(f"{split}.json", "w", encoding="utf-8") as handle:
-    json.dump(
-        {
-            "format_version": 1,
-            "split": split,
-            "episodes": [
-                {"episode_id": episode_id, "actions": action_traces[episode_id]}
-                for episode_id in sorted(action_traces)
-            ],
-        },
-        handle,
-        indent=2,
-    )
+```bash
+python /toolkit/scripts/export_cma_submission.py \
+  --output-dir /workspace/cma-submission
 ```
 
-The source already imports `json` and `defaultdict`. Record the action before
-each `envs.step` call; do not reconstruct turns or looks from saved positions.
-The configured action order is the action-index order used by the policy.
-The released four-action CMA checkpoint need not be expanded to six actions:
-its action vocabulary is a valid subset of the challenge vocabulary.
+For multiple GPUs, append `--gpu-ids 0 1` (container-visible GPU indices).
+The exporter retains completed scan shards, so the same command can resume an
+interrupted run. Changed inputs require a new output directory. Worker logs and
+export metadata are saved alongside the results.
+For native simulator diagnostics, rerun with `HAVLN_CMA_VERBOSE=1` set.
+
+The published [CMA checkpoint](https://huggingface.co/datasets/fly1113/HA-VLN/tree/main/checkpoints/HA-VLN-CMA)
+contains the complete policy state, including instruction embeddings and visual
+encoders; this exporter needs no additional encoder initialization weights.
+Its four-action output head uses a valid subset of the six-action environment.
+No trainer edits or conversion from predicted positions are needed.
+
+Only complete coverage of all **778 `val_seen` and 1,839 `val_unseen` episodes**
+produces `val_seen.json`, `val_unseen.json`, and `submission.zip`.
+The ZIP is validated before publication.
+
+### 4. Validate, replay, and submit
+
+Inside the container:
+
+```bash
+havln-validate /workspace/cma-submission/submission.zip
+havln-score-phase1 \
+  --submission /workspace/cma-submission/submission.zip \
+  --output-dir /workspace/cma-submission/replay --gpu-ids 0
+```
+
+Validation checks format and exact coverage; replay computes the challenge
+metrics and Score. To replay with the unchanged public image in a separate
+container, use [Local Docker Replay](#-local-docker-replay).
+Upload `$WORK_ROOT/cma-submission/submission.zip` on the host to
+[CodaBench](https://www.codabench.org/competitions/18135/).
+The public-test and final phases use the same task and scoring algorithm;
+this walkthrough uses the released validation splits.
 
 ## 🐳 Local Docker Replay
 
@@ -253,9 +257,8 @@ licensed Matterport3D scenes. The immutable image reference is:
 ghcr.io/jostarxiong/havln-challenge-2026@sha256:e1a0544f66beaf5218cc9df63da51b4a1a22a6bf0471ca0c2f75e81ee02a6556
 ```
 
-The historical package name is only an image identifier; it does not impose
-a location for your own code. Install Docker and NVIDIA Container Toolkit
-for GPU replay. Validation and environment checks do not need a GPU:
+Install Docker and NVIDIA Container Toolkit for GPU replay.
+Validation and environment checks do not need a GPU:
 
 ```bash
 IMAGE=ghcr.io/jostarxiong/havln-challenge-2026@sha256:e1a0544f66beaf5218cc9df63da51b4a1a22a6bf0471ca0c2f75e81ee02a6556
@@ -453,6 +456,7 @@ For event and registration questions, email
 | Associated workshop | [RoboPAD 2026](https://robotpad2026.github.io/) |
 | HA-VLN 2.0 | [Project page](https://uwmilab.github.io/HA-VLN-webpage/) |
 | HA-VLN 2.0 code and CMA | [Official repository](https://github.com/UWMILab/HA-VLN) |
+| Released data and CMA checkpoint | [Hugging Face](https://huggingface.co/datasets/fly1113/HA-VLN) |
 | VLN-CE | [Original repository](https://github.com/jacobkrantz/VLN-CE) |
 | Challenge rules and submission details | [CodaBench](https://www.codabench.org/competitions/18135/) and this README |
 | HA-VLN 2.0 Get Started | [Project documentation](https://jostarxiong.github.io/havln2-docs/) |
