@@ -304,16 +304,16 @@ adapted by HA-VLN 2.0, as the executable reference baseline for this challenge
 NaVILA evaluated in the paper). Participants are free to use any model or
 planning approach that outputs valid action sequences.
 
-Organizer re-evaluation of the public CMA validation checkpoint produced:
+Example local replay of the CMA walkthrough above produced:
 
 | Split | SR ↑ | NE ↓ | CR ↓ | TCR ↓ | Score ↑ |
 |:--|--:|--:|--:|--:|--:|
-| `val_seen` | 0.165 | 6.230 | 0.638 | 13.271 | 15.469585 |
-| `val_unseen` | 0.114 | 6.502 | 0.689 | 22.352 | 11.944822 |
+| `val_seen` | 0.180 | 6.223 | 0.623 | 13.726 | 16.509450 |
+| `val_unseen` | 0.129 | 6.387 | 0.684 | 17.536 | 12.945387 |
 
 Score is calculated from unrounded metrics; the displayed component metrics are
-rounded. Values may differ slightly from other reported CMA runs because of
-checkpoint, runtime, or evaluation details.
+rounded. Humans move in real time, so repeat runs can differ. These are reference
+results; only CodaBench's official replay determines leaderboard scores.
 
 ## 📏 Evaluation
 
