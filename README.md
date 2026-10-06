@@ -124,7 +124,10 @@ approved, obtain the official `download_mp.py` script and follow the
 to download the Habitat scene assets:
 
 ```bash
-python2 download_mp.py --task habitat -o /absolute/path/to/havln2-data/scene_datasets/mp3d/
+python3 download_mp.py -o /absolute/path/to/havln2-data/scene_datasets --task_data habitat
+# After task-data download finishes, press Ctrl-C at the prompt for the main dataset.
+# Extract habitat scene meshes so they reside at scene_datasets/mp3d/<scan>/<scan>.glb
+unzip /absolute/path/to/havln2-data/scene_datasets/v1/tasks/mp3d_habitat.zip -d /absolute/path/to/havln2-data/scene_datasets
 ```
 
 The resulting layout must include
@@ -215,8 +218,7 @@ python /toolkit/scripts/export_cma_submission.py \
 
 For multiple GPUs, append `--gpu-ids 0 1` (container-visible GPU indices).
 The exporter retains completed scan shards, so the same command can resume an
-interrupted run. Changed inputs require a new output directory. Worker logs and
-export metadata are saved alongside the results.
+interrupted run. Changed inputs require a new output directory. 本地多 GPU 子进程日志与导出元数据 (Local multi-GPU subprocess logs and export metadata) are saved alongside the results.
 For native simulator diagnostics, rerun with `HAVLN_CMA_VERBOSE=1` set.
 
 The published [CMA checkpoint](https://huggingface.co/datasets/fly1113/HA-VLN/tree/main/checkpoints/HA-VLN-CMA)
