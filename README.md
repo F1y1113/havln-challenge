@@ -49,7 +49,7 @@ not move the agent and have no binding to human animation frames.
 
 ## 📅 Competition Details
 
-- **Event:** RoboWorld Challenge 2026, Track 2.
+- **Event:** [RoboWorld Challenge 2026, Track 2](https://roboworld2026.github.io/track2).
 - **Associated workshop:** [RoboPAD Workshop at NeurIPS 2026](https://robotpad2026.github.io/).
 - **Registration:** register through the [Google Form](https://roboworld2026.github.io/#registration) (registration opens Oct 08, 2026) to be eligible for the leaderboard, certificates, and awards.
 - **Submission platform:** [CodaBench — HA-VLN](https://www.codabench.org/competitions/18135/).
