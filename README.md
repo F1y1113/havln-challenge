@@ -7,14 +7,16 @@
 *Built on [HA-VLN 2.0](https://uwmilab.github.io/HA-VLN-webpage/) and co-organized with the [RoboPAD Workshop at NeurIPS 2026](https://robotpad2026.github.io/)*
 
 [![RoboWorld](https://img.shields.io/badge/RoboWorld-2026-blue)](https://roboworld2026.github.io/)
-[![Track 2](https://img.shields.io/badge/Track_2-HA--VLN-green)](https://f1y1113.github.io/havln-challenge/)
+[![Track 2](https://img.shields.io/badge/Track_2-HA--VLN-green)](https://roboworld2026.github.io/track2)
 [![CodaBench](https://img.shields.io/badge/CodaBench-Submit-purple)](https://www.codabench.org/competitions/18135/)
 [![RoboPAD](https://img.shields.io/badge/Jointly_with-RoboPAD_2026-red)](https://robotpad2026.github.io/)
 [![Paper](https://img.shields.io/badge/arXiv-2503.14229-b31b1b)](https://arxiv.org/abs/2503.14229)
 
-**🏆 Prize Pool: $2,800 (1st: $1,500 · 2nd: $800 · 3rd: $500) + certificates; Rising Star Award**
+<p align="center">
+  <img src="assets/media/track2-havln-poster.png" alt="RoboWorld 2026 Track 2: HA-VLN Poster" width="460" />
+</p>
 
-<img src="assets/media/teaser.webp" alt="HA-VLN task overview" width="82%" />
+**🏆 Awards: Certificates of Recognition for Top 5 Teams & Best Innovation · Oral Presentations @ NeurIPS 2026 RoboPAD**
 
 </div>
 
@@ -27,6 +29,10 @@ ground human-referenced route instructions, adapt to moving bystanders, and
 reach the goal without human collisions. Official scoring replays submitted
 action sequences in the released HA-VLN 2.0 Habitat 0.1.7 runtime, and any
 policy, planner, world model, or VLA method that outputs valid actions is welcome.
+
+<p align="center">
+  <img src="assets/media/teaser.webp" alt="HA-VLN task overview" width="85%" />
+</p>
 
 ### 🎯 Task Definition
 
@@ -45,7 +51,7 @@ not move the agent and have no binding to human animation frames.
 
 - **Event:** RoboWorld Challenge 2026, Track 2.
 - **Associated workshop:** [RoboPAD Workshop at NeurIPS 2026](https://robotpad2026.github.io/).
-- **Registration:** register through [RoboWorld 2026](https://roboworld2026.github.io/) to be eligible for the leaderboard and awards.
+- **Registration:** register through the [Google Form](https://roboworld2026.github.io/#registration) (registration opens Oct 08, 2026) to be eligible for the leaderboard, certificates, and awards.
 - **Submission platform:** [CodaBench — HA-VLN](https://www.codabench.org/competitions/18135/).
 - **Submission limits:** five per day and 100 per phase; the best score is retained.
 
@@ -53,31 +59,31 @@ not move the agent and have no binding to human animation frames.
 
 | Event | Date |
 |:--|:--|
-| Phase 1 opens | September 30, 2026, 16:00 UTC |
-| Phase 1 deadline | October 31, 2026, 15:59 UTC |
-| Phase 2 opens | November 2026; exact time to be confirmed |
-| Phase 2 deadline | November 20, 2026; exact time to be confirmed |
-| Awards | December 2026 |
+| Registration opens | October 08, 2026 (via [Google Form](https://roboworld2026.github.io/#registration)) |
+| Data, baselines & servers online (Phase 1 opens) | October 15, 2026 |
+| Phase 1 deadline / Phase 2 opens | October 30, 2026 |
+| Final submission deadline (Phase 2 closes) | November 30, 2026 |
+| Award decision announcement | December 12, 2026 |
 
-Follow the [competition page](https://www.codabench.org/competitions/18135/) for any schedule updates.
+*Follow the [competition page](https://www.codabench.org/competitions/18135/) and [track website](https://roboworld2026.github.io/track2) for any updates.*
 
 ### 🗂️ Phases
 
-| Phase | Submission | Leaderboard role |
-|:--|:--|:--|
-| Phase 1 | Released `val_seen` and `val_unseen` action sequences | Reports both splits; ranks by full-precision `val_unseen` Score. |
-| Phase 2 | Action sequences for the held-out phase bundle | Determines final ranking and awards. |
+| Phase | Duration | Submission | Leaderboard role |
+|:--|:--|:--|:--|
+| Phase 1: Validation | Oct 15 – Oct 30, 2026 | Released `val_seen` and `val_unseen` action sequences | Reports both splits; ranks by full-precision `val_unseen` Score. |
+| Phase 2: Final Test | Oct 30 – Nov 30, 2026 | Action sequences for the held-out phase bundle | Determines final ranking and awards. |
 
 Both phases use the same six-action JSON contract and Score. Phase 1 and Phase
 2 results are not combined.
 
-### 🏆 Awards
+### 🏆 Awards & Recognition
 
-| Place | Award |
+| Recognition | Description |
 |:--|:--|
-| 🥇 1st | $1,500 USD + certificate |
-| 🥈 2nd | $800 USD + certificate |
-| 🥉 3rd | $500 USD + certificate |
+| 📜 **Certificates of Recognition** | Official certificates awarded to the **Top 5 teams** in Track 2 |
+| 💡 **Best Innovative Solution** | Certificate recognizing outstanding creativity and technical innovation |
+| 🎤 **Oral Presentations** | Selected top-performing teams will be invited to give oral presentations at the **RoboPAD Workshop @ NeurIPS 2026** |
 
 The [RoboWorld Rising Star Award](https://roboworld2026.github.io/) is also available; see the event site for eligibility and details.
 
@@ -454,7 +460,7 @@ For event and registration questions, email
 |:--|:--|
 | RoboWorld 2026 | [Challenge website](https://roboworld2026.github.io/) |
 | Starting kits, submissions, and leaderboard | [CodaBench](https://www.codabench.org/competitions/18135/) |
-| Track website | [HA-VLN Challenge](https://f1y1113.github.io/havln-challenge/) |
+| Track website | [HA-VLN Challenge](https://roboworld2026.github.io/track2) |
 | Challenge repository and participant toolkit | [GitHub](https://github.com/F1y1113/havln-challenge) |
 | Associated workshop | [RoboPAD 2026](https://robotpad2026.github.io/) |
 | HA-VLN 2.0 | [Project page](https://uwmilab.github.io/HA-VLN-webpage/) |
@@ -489,7 +495,7 @@ If you use HA-VLN 2.0 or this challenge toolkit, cite the benchmark paper:
   title={Track 2 | HA-VLN: Human-Aware Vision-and-Language Navigation},
   author={RoboWorld Challenge 2026 Organizers},
   year={2026},
-  howpublished={https://f1y1113.github.io/havln-challenge/}
+  howpublished={https://roboworld2026.github.io/track2}
 }
 ```
 
