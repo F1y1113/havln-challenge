@@ -82,59 +82,6 @@ Both phases use the same six-action JSON contract and Score. Phase 1 and Phase
 | 💡 **Best Innovative Solution** | Certificate recognizing outstanding creativity and technical innovation |
 | 🎤 **Oral Presentations** | Selected top-performing teams will be invited to give oral presentations at the **RoboPAD Workshop @ NeurIPS 2026** |
 
-## 📊 Dataset
-
-The challenge uses released HA-VLN 2.0 resources: HA-R2R navigation episodes
-and instructions, HAPS2.0 human assets, multi-human annotations, and licensed
-Matterport3D scenes. Challenge datasets are external to the Docker image.
-
-| HA-R2R split | Episodes |
-|:--|--:|
-| Train | 10,819 |
-| Validation Seen (`val_seen`) | 778 |
-| Validation Unseen (`val_unseen`) | 1,839 |
-| Test | 3,408 |
-| **Total** | **16,844** |
-
-The complete HA-R2R benchmark spans 90 scenes, and HAPS 2.0 provides 910
-human models and 486 motion sequences (120 frames each). Phase 1 requires one
-action sequence for each of the 778 `val_seen` and 1,839 `val_unseen` episodes.
-Phase 2 provides test inputs for final evaluation, while reference paths and
-annotations remain withheld.
-
-```text
-/data/havln2/
-├── HA-R2R/
-│   ├── val_seen/val_seen_bertidx.json.gz
-│   └── val_unseen/val_unseen_bertidx.json.gz
-├── HA-R2R-tools/
-│   ├── collision_num_val_seen.json
-│   └── collision_num_val_unseen.json
-├── Multi-Human-Annotations/human_motion.json
-├── HAPS2_0/<released-human-assets>
-├── scene_datasets/mp3d/<licensed-scene-assets>
-├── checkpoints/HA-VLN-CMA/ckpt.39.pth # optional reference policy
-└── recompute_navmesh/                 # writable replay cache
-```
-
-To obtain Matterport3D, visit the [official dataset page](https://niessner.github.io/Matterport/),
-sign its [Terms of Use](https://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf), and send
-the signed form to `matterport3d@googlegroups.com` to request access. Once
-approved, obtain the official `download_mp.py` script and follow the
-[HA-VLN 2.0 VLN-CE scene instructions](https://github.com/UWMILab/HA-VLN/blob/main/agent/VLN-CE/README.md#scenes-matterport3d)
-to download the Habitat scene assets:
-
-```bash
-python3 download_mp.py -o /absolute/path/to/havln2-data/scene_datasets --task_data habitat
-# After task-data download finishes, press Ctrl-C at the prompt for the main dataset.
-# Extract habitat scene meshes so they reside at scene_datasets/mp3d/<scan>/<scan>.glb
-unzip /absolute/path/to/havln2-data/scene_datasets/v1/tasks/mp3d_habitat.zip -d /absolute/path/to/havln2-data/scene_datasets
-```
-
-The resulting layout must include
-`<host-data-root>/scene_datasets/mp3d/<scan>/<scan>.glb`. When using the challenge
-Docker image, mount your host data root at `/data/havln2` and run `havln-check-data`.
-
 ## 🚀 Getting Started
 
 This walkthrough runs the released CMA checkpoint, records the actions actually
@@ -208,6 +155,24 @@ havln-validate /workspace/cma-submission/submission.zip
 ```
 
 Once validated, upload `$WORK_ROOT/cma-submission/submission.zip` on your host to [CodaBench](https://www.codabench.org/competitions/18135/).
+
+## 📊 Dataset
+
+The challenge is built on released HA-VLN 2.0 resources: HA-R2R navigation episodes,
+HAPS 2.0 dynamic human assets, and licensed Matterport3D scenes. Challenge datasets
+are mounted externally into the container.
+
+| HA-R2R split | Episodes |
+|:--|--:|
+| Train | 10,819 |
+| Validation Seen (`val_seen`) | 778 |
+| Validation Unseen (`val_unseen`) | 1,839 |
+| Test | 3,408 |
+| **Total** | **16,844** |
+
+- **HA-R2R**: 16,844 instructions across 90 scenes with multi-human interaction annotations.
+- **HAPS 2.0**: 486 dynamic 3D human motion sequences across 172 activities.
+- **Matterport3D**: Licensed indoor scene assets. Obtain access via the [Matterport3D project](https://niessner.github.io/Matterport/) and place extracted meshes under `$DATA_ROOT/scene_datasets/mp3d/<scan>/<scan>.glb` (see [FAQ Q7](#-frequently-asked-questions)).
 
 ## 🧠 Baseline Model
 
@@ -292,16 +257,13 @@ No. Any method is eligible if it exports legal official action sequences.
 
 **Q2. Do I submit code, weights, or a container?**
 
-For CodaBench scoring, submit only the required JSON action-sequence files in
-one ZIP; no code, weights, or container are part of that upload. However, if
-your team earns an award, you will be expected to contribute to a technical
-report explaining your method and innovations, including relevant model,
-training, and implementation details. Organizers may request code or model
-information to verify an awarded result.
+No code, weights, or containers:
+- **Standard Submission:** Upload only the required JSON action-sequence files in a single ZIP.
+- **Award Winners:** Teams qualifying for awards (Top 5, Best Innovative Solution, or RoboPAD presentation) will be expected to contribute to a technical report and may be asked to provide code or models for verification.
 
 **Q3. Are `LOOK_UP` and `LOOK_DOWN` valid?**
 
-Yes. Both are original VLN-CE pitch actions and count toward 500 task steps.
+Yes. Both actions are valid and count toward the 500 task steps.
 
 **Q4. Does an action advance a human animation frame?**
 
@@ -340,7 +302,7 @@ For event and registration questions, email
 
 | Resource | Link |
 |:--|:--|
-| HA-VLN 2.0 Benchmark | [Project page](https://uwmilab.github.io/HA-VLN-webpage/) & [GitHub](https://github.com/UWMILab/HA-VLN) |
+| HA-VLN 2.0 | [Project page](https://uwmilab.github.io/HA-VLN-webpage/) & [GitHub](https://github.com/UWMILab/HA-VLN) |
 | RoboWorld 2026 | [Challenge website](https://roboworld2026.github.io/) |
 | Track 2 HA-VLN | [Track website](https://roboworld2026.github.io/track2) |
 | CodaBench Platform | [Submissions and leaderboard](https://www.codabench.org/competitions/18135/) |
