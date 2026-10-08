@@ -2,14 +2,14 @@
 
 <div align="center" markdown="1">
 
-**Official participant toolkit for RoboWorld 2026 Track 2**
+**Official participant toolkit for [RoboWorld 2026](https://roboworld2026.github.io/) Track 2**
 
-*Built on [HA-VLN 2.0](https://uwmilab.github.io/HA-VLN-webpage/) and co-organized with the [RoboPAD Workshop at NeurIPS 2026](https://robotpad2026.github.io/)*
+*Built on [HA-VLN 2.0](https://uwmilab.github.io/HA-VLN-webpage/) and affiliated with the [RoboPAD Workshop at NeurIPS 2026](https://robotpad2026.github.io/)*
 
 [![RoboWorld](https://img.shields.io/badge/RoboWorld-2026-blue)](https://roboworld2026.github.io/)
 [![Track 2](https://img.shields.io/badge/Track_2-HA--VLN-green)](https://roboworld2026.github.io/track2)
 [![CodaBench](https://img.shields.io/badge/CodaBench-Submit-purple)](https://www.codabench.org/competitions/18135/)
-[![RoboPAD](https://img.shields.io/badge/Jointly_with-RoboPAD_2026-red)](https://robotpad2026.github.io/)
+[![RoboPAD](https://img.shields.io/badge/Affiliated_with-RoboPAD_2026-red)](https://robotpad2026.github.io/)
 [![Paper](https://img.shields.io/badge/arXiv-2503.14229-b31b1b)](https://arxiv.org/abs/2503.14229)
 
 <p align="center">
@@ -47,7 +47,7 @@ policy, planner, world model, or VLA method that outputs valid actions is welcom
 ## 📅 Competition Details
 
 - **Event:** [RoboWorld Challenge 2026, Track 2](https://roboworld2026.github.io/track2).
-- **Associated workshop:** [RoboPAD Workshop at NeurIPS 2026](https://robotpad2026.github.io/).
+- **Affiliated workshop:** [RoboPAD Workshop at NeurIPS 2026](https://robotpad2026.github.io/).
 - **Registration:** register through the [Google Form](https://roboworld2026.github.io/#registration) (registration opens Oct 08, 2026) to be eligible for the leaderboard, certificates, and awards.
 - **Submission platform:** [CodaBench — HA-VLN](https://www.codabench.org/competitions/18135/).
 - **Submission limits:** five per day and 100 per phase; the best score is retained.
@@ -153,17 +153,8 @@ DATA_ROOT=/absolute/path/to/havln2-data
 bash scripts/download_data.sh --destination "$DATA_ROOT" --target all
 ```
 
-Use the Linux filesystem rather than a Windows-mounted drive for HAPS 2.0:
-released asset directory names contain colons.
-
-`--target core` (the default) downloads replay data and human assets;
-`--target cma` downloads the checkpoint and its matching instruction-token inputs.
-Small annotation files come from the released GitHub repository. Add your
-separately licensed Matterport3D scenes under
-`$DATA_ROOT/scene_datasets/mp3d/<scan>/<scan>.glb`.
-For the older dataset mirrors, use `--source gdrive` with `gdown` installed;
-the CMA checkpoint still comes from Hugging Face. Existing files with a different
-checksum are rejected rather than overwritten.
+Use a Linux/WSL filesystem for HAPS 2.0 asset extraction. Place your licensed
+Matterport3D scenes under `$DATA_ROOT/scene_datasets/mp3d/<scan>/<scan>.glb`.
 
 ### 2. Start a development container and install CMA dependencies
 
@@ -193,116 +184,43 @@ The setup script retrieves pinned public policy sources and installs the inferen
 dependencies while retaining the image's Habitat core. Re-enter with
 `docker start -ai havln-cma` after exiting.
 
-### 3. Run CMA and export the executed actions
+### 3. Run CMA and export the executed actions (Optional)
 
-First run a diagnostic on two episodes **per split**:
+You do not need to use the CMA baseline for your competition submission; any model or planning approach that outputs valid action sequences is welcome. We provide this reference baseline walkthrough to illustrate how to export and verify a valid submission archive.
 
-```bash
-python /toolkit/scripts/export_cma_submission.py \
-  --output-dir /workspace/cma-smoke --episode-limit 2
-```
-
-This writes diagnostic JSON files only, not a submission ZIP.
-For the complete validation sets, run:
+To run CMA inference and export action predictions for the validation splits:
 
 ```bash
 python /toolkit/scripts/export_cma_submission.py \
   --output-dir /workspace/cma-submission
 ```
 
-For multiple GPUs, append `--gpu-ids 0 1` (container-visible GPU indices).
-The exporter retains completed scan shards, so the same command can resume an
-interrupted run. Local multi-GPU subprocess logs and export metadata are saved alongside the results.
+For multiple GPUs, append `--gpu-ids 0 1` (container-visible GPU indices). The exporter retains completed scan shards, so the same command can resume an interrupted run. Local multi-GPU subprocess logs and export metadata are saved alongside the results.
 
-The published [CMA checkpoint](https://huggingface.co/datasets/fly1113/HA-VLN/tree/main/checkpoints/HA-VLN-CMA)
-contains the complete policy state, using four planar actions that form a valid
-subset of the six-action action space.
+Completing all **778 `val_seen` and 1,839 `val_unseen` episodes** automatically packages `val_seen.json`, `val_unseen.json`, and `submission.zip`.
 
-Complete coverage of all **778 `val_seen` and 1,839 `val_unseen` episodes**
-produces `val_seen.json`, `val_unseen.json`, and `submission.zip`.
+### 4. Validate and submit
 
-### 4. Validate, replay, and submit
-
-Inside the container:
+Inside the container, verify your submission package:
 
 ```bash
 havln-validate /workspace/cma-submission/submission.zip
-havln-score-phase1 \
-  --submission /workspace/cma-submission/submission.zip \
-  --output-dir /workspace/cma-submission/replay --gpu-ids 0
 ```
 
-Validation checks format and exact coverage; replay computes the challenge
-metrics and Score. To replay with the unchanged public image in a separate
-container, use [Local Docker Replay](#-local-docker-replay).
-Upload `$WORK_ROOT/cma-submission/submission.zip` on the host to
-[CodaBench](https://www.codabench.org/competitions/18135/).
-The public-test and final phases use the same task and scoring algorithm;
-this walkthrough uses the released validation splits.
-
-## 🐳 Local Docker Replay
-
-The public runtime image is optional for participants. It contains the
-HA-VLN 2.0 / Habitat 0.1.7 replay environment, but no challenge data or
-licensed Matterport3D scenes. The immutable image reference is:
-
-```text
-ghcr.io/jostarxiong/havln-challenge-2026@sha256:e1a0544f66beaf5218cc9df63da51b4a1a22a6bf0471ca0c2f75e81ee02a6556
-```
-
-Install Docker and NVIDIA Container Toolkit for GPU replay.
-Validation and environment checks do not need a GPU:
-
-```bash
-IMAGE=ghcr.io/jostarxiong/havln-challenge-2026@sha256:e1a0544f66beaf5218cc9df63da51b4a1a22a6bf0471ca0c2f75e81ee02a6556
-DATA_ROOT=/absolute/path/to/havln2-data
-NAVMESH_ROOT=/absolute/path/to/writable-navmesh-cache
-WORK_ROOT=/absolute/path/to/participant-workspace
-
-docker pull "$IMAGE"
-docker run --rm "$IMAGE" havln-check-environment
-docker run --rm \
-  -v "$DATA_ROOT:/data/havln2:ro" \
-  -v "$NAVMESH_ROOT:/data/havln2/recompute_navmesh" \
-  "$IMAGE" havln-check-data
-docker run --rm -v "$WORK_ROOT:/workspace" "$IMAGE" \
-  havln-validate /workspace/submission.zip
-```
-
-For optional complete Phase 1 replay, expose the GPUs selected on your host.
-The `--gpu-ids` values are GPU ordinals as seen *inside* the container:
-
-```bash
-docker run --rm --gpus '"device=0,1"' \
-  -v "$DATA_ROOT:/data/havln2:ro" \
-  -v "$NAVMESH_ROOT:/data/havln2/recompute_navmesh" \
-  -v "$WORK_ROOT:/workspace" \
-  "$IMAGE" havln-score-phase1 \
-  --submission /workspace/submission.zip \
-  --output-dir /workspace/results \
-  --gpu-ids 0 1
-```
-
-Local replay may generate navmeshes in the separately writable cache mount.
+Once validated, upload `$WORK_ROOT/cma-submission/submission.zip` on your host to [CodaBench](https://www.codabench.org/competitions/18135/).
 
 ## 🧠 Baseline Model
 
-We provide **HA-VLN-CMA**, the released VLN-CE cross-modal attention agent
-adapted by HA-VLN 2.0, as the executable reference baseline for this challenge
-(alongside HA-VLN-VL and external methods such as BEVBert, ETPNav, NaVid, and
-NaVILA evaluated in the paper). Participants are free to use any model or
-planning approach that outputs valid action sequences.
+We provide **HA-VLN-CMA** as the reference baseline for Track 2. For model architecture and training details, refer to the official [HA-VLN repository](https://github.com/UWMILab/HA-VLN). Participants are free to use any model, planner, or VLA approach that outputs valid discrete action sequences.
 
-Example local replay of the CMA walkthrough above produced:
+Evaluating the released CMA validation checkpoint produces reference results:
 
 | Split | SR ↑ | NE ↓ | CR ↓ | TCR ↓ | Score ↑ |
 |:--|--:|--:|--:|--:|--:|
 | `val_seen` | 0.180 | 6.223 | 0.623 | 13.726 | 16.509450 |
 | `val_unseen` | 0.129 | 6.387 | 0.684 | 17.536 | 12.945387 |
 
-Score is calculated from unrounded metrics; the displayed component metrics are
-rounded. Values may differ slightly from other reported CMA runs because of
-checkpoint, runtime, or evaluation details.
+*Note: Component metrics are rounded for display. All official rankings and leaderboard scores are determined by CodaBench replay evaluation.*
 
 ## 📏 Evaluation
 
@@ -422,12 +340,11 @@ For event and registration questions, email
 
 | Resource | Link |
 |:--|:--|
+| HA-VLN 2.0 Benchmark | [Project page](https://uwmilab.github.io/HA-VLN-webpage/) & [GitHub](https://github.com/UWMILab/HA-VLN) |
 | RoboWorld 2026 | [Challenge website](https://roboworld2026.github.io/) |
 | Track 2 HA-VLN | [Track website](https://roboworld2026.github.io/track2) |
 | CodaBench Platform | [Submissions and leaderboard](https://www.codabench.org/competitions/18135/) |
 | RoboPAD Workshop | [RoboPAD @ NeurIPS 2026](https://robotpad2026.github.io/) |
-| HA-VLN 2.0 | [Project page](https://uwmilab.github.io/HA-VLN-webpage/) & [GitHub](https://github.com/UWMILab/HA-VLN) |
-| Benchmark Data & CMA | [Hugging Face](https://huggingface.co/datasets/fly1113/HA-VLN) |
 
 ## 📄 License and Terms
 
@@ -457,6 +374,6 @@ If you use HA-VLN 2.0 or this challenge toolkit, cite the benchmark paper:
 
 ## 🤝 Acknowledgements
 
-The track is organized by the RoboWorld Challenge 2026 team and jointly held
-with RoboPAD 2026. We thank the HA-VLN 2.0 and VLN-CE authors, dataset and
-simulator contributors, Matterport3D, and CodaBench.
+The track is organized by the RoboWorld Challenge 2026 team and affiliated with
+the RoboPAD Workshop at NeurIPS 2026. We thank the HA-VLN 2.0 and VLN-CE authors,
+dataset and simulator contributors, Matterport3D, and CodaBench.
