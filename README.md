@@ -128,6 +128,9 @@ to download the Habitat scene assets:
 
 ```bash
 python3 download_mp.py -o /absolute/path/to/havln2-data/scene_datasets --task_data habitat
+# After task-data download finishes, press Ctrl-C at the prompt for the main dataset.
+# Extract habitat scene meshes so they reside at scene_datasets/mp3d/<scan>/<scan>.glb
+unzip /absolute/path/to/havln2-data/scene_datasets/v1/tasks/mp3d_habitat.zip -d /absolute/path/to/havln2-data/scene_datasets
 ```
 
 The resulting layout must include

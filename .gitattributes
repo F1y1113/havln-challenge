@@ -4,3 +4,4 @@ cma/*.yaml text eol=lf
 cma/*.txt text eol=lf
 *.md text eol=lf
 *.sh text eol=lf
+*.html text eol=lf
