@@ -10,6 +10,7 @@
 [![Track 2](https://img.shields.io/badge/Track_2-HA--VLN-green)](https://roboworld2026.github.io/track2)
 [![CodaBench](https://img.shields.io/badge/CodaBench-Submit-purple)](https://www.codabench.org/competitions/18135/)
 [![RoboPAD](https://img.shields.io/badge/Affiliated_with-RoboPAD_2026-red)](https://robotpad2026.github.io/)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Chat-5865F2?logo=discord&logoColor=white)](https://discord.gg/S8s8JcxtT)
 [![Paper](https://img.shields.io/badge/arXiv-2503.14229-b31b1b)](https://arxiv.org/abs/2503.14229)
 
 <p align="center">
@@ -297,8 +298,16 @@ the challenge Docker image, mount it at `/data/havln2` inside the container.
 ## 🔗 Contact and Resources
 
 For technical support, use [GitHub Issues](https://github.com/F1y1113/havln-challenge/issues).
-For event and registration questions, email
-[roboworld2026@gmail.com](mailto:roboworld2026@gmail.com).
+For event and registration questions, email [roboworld2026@gmail.com](mailto:roboworld2026@gmail.com).
+
+### 💬 Community & Discussion
+
+- **Discord:** [Join the RoboWorld Track 2 Discord](https://discord.gg/S8s8JcxtT)
+- **WeChat Group:** Scan the QR code below to join the Track 2 discussion group:
+
+<p align="center">
+  <img src="assets/media/wechat_qr.png" alt="Track 2 WeChat Group QR Code" width="220" />
+</p>
 
 | Resource | Link |
 |:--|:--|
@@ -307,6 +316,7 @@ For event and registration questions, email
 | Track 2 HA-VLN | [Track website](https://roboworld2026.github.io/track2) |
 | CodaBench Platform | [Submissions and leaderboard](https://www.codabench.org/competitions/18135/) |
 | RoboPAD Workshop | [RoboPAD @ NeurIPS 2026](https://robotpad2026.github.io/) |
+| Discord Community | [Join Server](https://discord.gg/S8s8JcxtT) |
 
 ## 📄 License and Terms
 
