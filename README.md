@@ -82,8 +82,6 @@ Both phases use the same six-action JSON contract and Score. Phase 1 and Phase
 | 💡 **Best Innovative Solution** | Certificate recognizing outstanding creativity and technical innovation |
 | 🎤 **Oral Presentations** | Selected top-performing teams will be invited to give oral presentations at the **RoboPAD Workshop @ NeurIPS 2026** |
 
-The [RoboWorld Rising Star Award](https://roboworld2026.github.io/) is also available; see the event site for eligibility and details.
-
 ## 📊 Dataset
 
 The challenge uses released HA-VLN 2.0 resources: HA-R2R navigation episodes
