@@ -224,7 +224,7 @@ python /toolkit/scripts/export_cma_submission.py \
 
 For multiple GPUs, append `--gpu-ids 0 1` (container-visible GPU indices).
 The exporter retains completed scan shards, so the same command can resume an
-interrupted run. Changed inputs require a new output directory. 本地多 GPU 子进程日志与导出元数据 (Local multi-GPU subprocess logs and export metadata) are saved alongside the results.
+interrupted run. Changed inputs require a new output directory. Local multi-GPU subprocess logs and export metadata are saved alongside the results.
 For native simulator diagnostics, rerun with `HAVLN_CMA_VERBOSE=1` set.
 
 The published [CMA checkpoint](https://huggingface.co/datasets/fly1113/HA-VLN/tree/main/checkpoints/HA-VLN-CMA)
