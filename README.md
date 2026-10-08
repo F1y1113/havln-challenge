@@ -44,9 +44,6 @@ policy, planner, world model, or VLA method that outputs valid actions is welcom
 | Budget | 1–500 actions; all six actions count toward the limit. |
 | Evaluation | Trusted simulator replay measuring navigation and human-aware safety. |
 
-`LOOK_UP` and `LOOK_DOWN` are legal pitch-changing actions from VLN-CE. They do
-not move the agent and have no binding to human animation frames.
-
 ## 📅 Competition Details
 
 - **Event:** [RoboWorld Challenge 2026, Track 2](https://roboworld2026.github.io/track2).
@@ -93,19 +90,19 @@ The challenge uses released HA-VLN 2.0 resources: HA-R2R navigation episodes
 and instructions, HAPS2.0 human assets, multi-human annotations, and licensed
 Matterport3D scenes. Challenge datasets are external to the Docker image.
 
-| HA-R2R split | Instructions | Distinct trajectories | Human-influenced episodes ($\beta L$) |
-|:--|--:|--:|--:|
-| Train | 10,819 | 3,603 | — |
-| Validation Seen (`val_seen`) | 778 | 259 | 682 |
-| Validation Unseen (`val_unseen`) | 1,839 | 613 | 1,593 |
-| Test | 3,408 | — | — |
-| **Total** | **16,844** | — | — |
+| HA-R2R split | Episodes |
+|:--|--:|
+| Train | 10,819 |
+| Validation Seen (`val_seen`) | 778 |
+| Validation Unseen (`val_unseen`) | 1,839 |
+| Test | 3,408 |
+| **Total** | **16,844** |
 
 The complete HA-R2R benchmark spans 90 scenes, and HAPS 2.0 provides 910
 human models and 486 motion sequences (120 frames each). Phase 1 requires one
 action sequence for each of the 778 `val_seen` and 1,839 `val_unseen` episodes.
-Phase 2 provides test inputs for final evaluation, while reference trajectories
-and collision annotations remain withheld.
+Phase 2 provides test inputs for final evaluation, while reference paths and
+annotations remain withheld.
 
 ```text
 /data/havln2/
@@ -131,17 +128,11 @@ to download the Habitat scene assets:
 
 ```bash
 python3 download_mp.py -o /absolute/path/to/havln2-data/scene_datasets --task_data habitat
-# After task-data download finishes, press Ctrl-C at the prompt for the main dataset.
-# Extract habitat scene meshes so they reside at scene_datasets/mp3d/<scan>/<scan>.glb
-unzip /absolute/path/to/havln2-data/scene_datasets/v1/tasks/mp3d_habitat.zip -d /absolute/path/to/havln2-data/scene_datasets
 ```
 
 The resulting layout must include
-`<host-data-root>/scene_datasets/mp3d/<scan>/<scan>.glb`. Your host data root
-can be anywhere. When using the challenge Docker image, mount it at
-`/data/havln2` and run `havln-check-data`.
-Matterport3D is not included in this repository, helper script, image, or
-submission kit.
+`<host-data-root>/scene_datasets/mp3d/<scan>/<scan>.glb`. When using the challenge
+Docker image, mount your host data root at `/data/havln2` and run `havln-check-data`.
 
 ## 🚀 Getting Started
 
@@ -199,11 +190,7 @@ havln-check-data
 
 The setup script retrieves pinned public policy sources and installs the inference
 dependencies while retaining the image's Habitat core. Re-enter with
-`docker start -ai havln-cma` after exiting. Keep this named container to reuse
-installed dependencies; removing it removes that installation, but not the
-mounted data, sources, or exported results. Data symlinks require their targets
-to be mounted too. For scenes stored elsewhere, bind-mount them into a real
-`/data/havln2/scene_datasets/mp3d` directory rather than a nested directory symlink.
+`docker start -ai havln-cma` after exiting.
 
 ### 3. Run CMA and export the executed actions
 
@@ -224,18 +211,14 @@ python /toolkit/scripts/export_cma_submission.py \
 
 For multiple GPUs, append `--gpu-ids 0 1` (container-visible GPU indices).
 The exporter retains completed scan shards, so the same command can resume an
-interrupted run. Changed inputs require a new output directory. Local multi-GPU subprocess logs and export metadata are saved alongside the results.
-For native simulator diagnostics, rerun with `HAVLN_CMA_VERBOSE=1` set.
+interrupted run. Local multi-GPU subprocess logs and export metadata are saved alongside the results.
 
 The published [CMA checkpoint](https://huggingface.co/datasets/fly1113/HA-VLN/tree/main/checkpoints/HA-VLN-CMA)
-contains the complete policy state, including instruction embeddings and visual
-encoders; this exporter needs no additional encoder initialization weights.
-Its four-action output head uses a valid subset of the six-action environment.
-No trainer edits or conversion from predicted positions are needed.
+contains the complete policy state, using four planar actions that form a valid
+subset of the six-action action space.
 
-Only complete coverage of all **778 `val_seen` and 1,839 `val_unseen` episodes**
+Complete coverage of all **778 `val_seen` and 1,839 `val_unseen` episodes**
 produces `val_seen.json`, `val_unseen.json`, and `submission.zip`.
-The ZIP is validated before publication.
 
 ### 4. Validate, replay, and submit
 
@@ -300,10 +283,6 @@ docker run --rm --gpus '"device=0,1"' \
 ```
 
 Local replay may generate navmeshes in the separately writable cache mount.
-Participant code may live anywhere and may be mounted read-only at any path;
-there is no required launcher or agent directory. Local results help with
-development, but only CodaBench's official replay determines leaderboard
-scores.
 
 ## 🧠 Baseline Model
 
@@ -321,8 +300,8 @@ Example local replay of the CMA walkthrough above produced:
 | `val_unseen` | 0.129 | 6.387 | 0.684 | 17.536 | 12.945387 |
 
 Score is calculated from unrounded metrics; the displayed component metrics are
-rounded. Humans move in real time, so repeat runs can differ. These are reference
-results; only CodaBench's official replay determines leaderboard scores.
+rounded. Values may differ slightly from other reported CMA runs because of
+checkpoint, runtime, or evaluation details.
 
 ## 📏 Evaluation
 
@@ -330,28 +309,12 @@ results; only CodaBench's official replay determines leaderboard scores.
 |:--|:--|:--|
 | SR (Success Rate) | Higher | Collision-free success rate over all episodes. |
 | NE (Navigation Error) | Lower | Mean final navigation error in metres. |
-| CR (Collision Rate) | Lower | Collision-episode rate over released human-influenced episodes. |
+| CR (Collision Rate) | Lower | Collision-episode rate over human-influenced episodes. |
 | TCR (Total Collision Rate) | Lower | Mean adjusted human-collision count over all episodes. |
-
-Let $L$ be the number of episodes, $s_i$ the navigation-success indicator,
-$d_i$ the final goal distance, and $e_i$ the adjusted human-collision count.
-The released human-influenced episode count is $\beta L$:
-
-$$
-\begin{aligned}
-\mathrm{SR} &= \frac{1}{L}\sum_{i=1}^{L}s_i\mathbf{1}[e_i=0], &
-\mathrm{NE} &= \frac{1}{L}\sum_{i=1}^{L}d_i, \\
-\mathrm{CR} &= \frac{\sum_{i=1}^{L}\min(e_i,1)}{\beta L}, &
-\mathrm{TCR} &= \frac{1}{L}\sum_{i=1}^{L}e_i.
-\end{aligned}
-$$
-
-In particular, CR divides by the released human-influenced episode count
-$\beta L$, while SR, NE, and TCR divide by all $L$ episodes.
 
 ### 🏁 Composite Score
 
-The composite Score uses the full-precision metrics (higher is better):
+The composite Score combines navigation and social compliance metrics (higher is better):
 
 $$
 \begin{aligned}
@@ -454,21 +417,16 @@ the challenge Docker image, mount it at `/data/havln2` inside the container.
 
 For technical support, use [GitHub Issues](https://github.com/F1y1113/havln-challenge/issues).
 For event and registration questions, email
-[roboworld2026@outlook.com](mailto:roboworld2026@outlook.com).
+[roboworld2026@gmail.com](mailto:roboworld2026@gmail.com).
 
 | Resource | Link |
 |:--|:--|
 | RoboWorld 2026 | [Challenge website](https://roboworld2026.github.io/) |
-| Starting kits, submissions, and leaderboard | [CodaBench](https://www.codabench.org/competitions/18135/) |
-| Track website | [HA-VLN Challenge](https://roboworld2026.github.io/track2) |
-| Challenge repository and participant toolkit | [GitHub](https://github.com/F1y1113/havln-challenge) |
-| Associated workshop | [RoboPAD 2026](https://robotpad2026.github.io/) |
-| HA-VLN 2.0 | [Project page](https://uwmilab.github.io/HA-VLN-webpage/) |
-| HA-VLN 2.0 code and CMA | [Official repository](https://github.com/UWMILab/HA-VLN) |
-| Released data and CMA checkpoint | [Hugging Face](https://huggingface.co/datasets/fly1113/HA-VLN) |
-| VLN-CE | [Original repository](https://github.com/jacobkrantz/VLN-CE) |
-| Challenge rules and submission details | [CodaBench](https://www.codabench.org/competitions/18135/) and this README |
-| HA-VLN 2.0 Get Started | [Project documentation](https://jostarxiong.github.io/havln2-docs/) |
+| Track 2 HA-VLN | [Track website](https://roboworld2026.github.io/track2) |
+| CodaBench Platform | [Submissions and leaderboard](https://www.codabench.org/competitions/18135/) |
+| RoboPAD Workshop | [RoboPAD @ NeurIPS 2026](https://robotpad2026.github.io/) |
+| HA-VLN 2.0 | [Project page](https://uwmilab.github.io/HA-VLN-webpage/) & [GitHub](https://github.com/UWMILab/HA-VLN) |
+| Benchmark Data & CMA | [Hugging Face](https://huggingface.co/datasets/fly1113/HA-VLN) |
 
 ## 📄 License and Terms
 
