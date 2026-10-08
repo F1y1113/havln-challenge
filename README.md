@@ -16,7 +16,7 @@
   <img src="assets/media/track2-havln-poster.png" alt="RoboWorld 2026 Track 2: HA-VLN Poster" width="460" />
 </p>
 
-**🏆 Awards: Certificates of Recognition for Top 5 Teams & Best Innovation · Oral Presentations @ NeurIPS 2026 RoboPAD**
+**🏆 Awards: Official Certificates for Top 5 Teams & NeurIPS 2026 RoboPAD Workshop Oral Presentations**
 
 </div>
 
