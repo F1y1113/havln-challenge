@@ -481,14 +481,11 @@ governed by the Terms displayed on the official CodaBench competition.
 If you use HA-VLN 2.0 or this challenge toolkit, cite the benchmark paper:
 
 ```bibtex
-@misc{dong2026havln20openbenchmark,
-  title={HA-VLN 2.0: An Open Benchmark and Leaderboard for Human-Aware Navigation in Discrete and Continuous Environments with Dynamic Multi-Human Interactions},
-  author={Yifei Dong and Fengyi Wu and Qi He and Lingdong Kong and Heng Li and Minghan Li and Zebang Cheng and Yuxuan Zhou and Jingdong Sun and Qi Dai and Alexander G Hauptmann and Zhi-Qi Cheng},
-  year={2026},
-  eprint={2503.14229},
-  archivePrefix={arXiv},
-  primaryClass={cs.AI},
-  url={https://arxiv.org/abs/2503.14229}
+@inproceedings{dong2026havln,
+  author    = {Dong, Yifei and Wu, Fengyi and He, Qi and Kong, Lingdong and Li, Heng and Li, Minghan and Cheng, Zebang and Zhou, Yuxuan and Sun, Jingdong and Dai, Qi and Hauptmann, Alexander G. and Cheng, Zhi-Qi},
+  title     = {{HA-VLN 2.0: An Open Benchmark and Leaderboard for Human-Aware Navigation in Discrete and Continuous Environments with Dynamic Multi-Human Interactions}},
+  booktitle = {2026 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year      = {2026},
 }
 
 @misc{roboworld2026track2,
