@@ -31,7 +31,7 @@ action sequences in the released HA-VLN 2.0 Habitat 0.1.7 runtime, and any
 policy, planner, world model, or VLA method that outputs valid actions is welcome.
 
 <p align="center">
-  <img src="assets/media/teaser.webp" alt="HA-VLN task overview" width="85%" />
+  <img src="assets/media/teaser.webp" alt="HA-VLN task overview" width="90%" />
 </p>
 
 ### 🎯 Task Definition
