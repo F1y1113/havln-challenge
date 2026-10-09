@@ -310,9 +310,9 @@ For event and registration questions, email [roboworld2026@gmail.com](mailto:rob
 ### 💬 Community & Discussion
 
 - **Discord:** [Join the RoboWorld Track 2 Discord](https://discord.gg/S8s8JcxtT)
-- **WeChat Group:** Scan the QR code below to join the Track 2 discussion group:
+- **WeChat Group:** [Join the RoboWorld Track 2 WeChat Group](https://github.com/roboworld2026/roboworld2026.github.io/blob/main/wechat_track2.JPG)
 
-<img src="assets/media/wechat_qr.png" alt="Track 2 WeChat Group QR Code" width="220" />
+<a href="https://github.com/roboworld2026/roboworld2026.github.io/blob/main/wechat_track2.JPG" target="_blank"><img src="https://raw.githubusercontent.com/roboworld2026/roboworld2026.github.io/main/wechat_track2.JPG" alt="Track 2 WeChat Group QR Code" width="220" /></a>
 
 ## 📄 License and Terms
 
