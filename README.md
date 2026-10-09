@@ -304,7 +304,7 @@ the challenge Docker image, mount it at `/data/havln2` inside the container.
 | CodaBench Platform | [Submissions and leaderboard](https://www.codabench.org/competitions/18135/) |
 | RoboPAD Workshop | [RoboPAD @ NeurIPS 2026](https://robotpad2026.github.io/) |
 
-For technical support, use [GitHub Issues](https://github.com/F1y1113/havln-challenge/issues).
+For technical support, use [GitHub Issues](https://github.com/roboworld2026/track2/issues).
 For event and registration questions, email [roboworld2026@gmail.com](mailto:roboworld2026@gmail.com).
 
 ### 💬 Community & Discussion
